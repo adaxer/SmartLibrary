@@ -29,11 +29,11 @@ public partial class SearchViewModel : BaseViewModel, IRecipient<Book>
     private Task Search() => LoadDataAsync(); 
 
     [RelayCommand]
-    private async void GoToDetails(SampleItem item)
+    private async void GoToDetails(Book book)
     {
-        await navigationService.GoToAsync(nameof(SearchDetailViewModel), new Dictionary<string, object>
+        await navigationService.GoToAsync(nameof(DetailsViewModel), new Dictionary<string, object>
         {
-            { "Item", item }
+            { "BookId", book.Id }
         });
     }
 

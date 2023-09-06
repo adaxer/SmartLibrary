@@ -32,8 +32,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<MainPage>();
 
         builder.Services.AddTransient<SampleDataService>();
-        builder.Services.AddTransient<SearchDetailViewModel>();
-        builder.Services.AddTransient<SearchDetailPage>();
+        builder.Services.AddTransient<DetailsViewModel>();
+        builder.Services.AddTransient<DetailsPage>();
 
         builder.Services.AddSingleton<SearchViewModel>();
 

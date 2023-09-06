@@ -3,9 +3,26 @@
 namespace SmartLibrary.Services;
 public class MauiNavigationService : INavigationService
 {
-    public async Task GoToAsync(string target, Dictionary<string, object> parameters)
+    Dictionary<string, Dictionary<string, object>> currentParameters = new();
+
+    public Task GoToAsync(string targetViewModel, Dictionary<string, object> parameters)
     {
-        string targetPage = target.Replace("ViewModel", "Page");
-        await Shell.Current.GoToAsync(targetPage, parameters);
+        currentParameters[targetViewModel] = parameters;
+        return Shell.Current.GoToAsync(GetViewName(targetViewModel), true, parameters);
+    }
+
+    public Dictionary<string, object> NavigationParameters(string targetViewModel)
+    {
+        if (currentParameters.TryGetValue(targetViewModel, out var savedParameters))
+        {
+            currentParameters.Clear();
+            return savedParameters;
+        }
+        return null;
+    }
+
+    private ShellNavigationState GetViewName(string targetViewModel)
+    {
+        return targetViewModel.Replace("ViewModel", "Page");
     }
 }
