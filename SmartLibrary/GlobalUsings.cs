@@ -1,0 +1,16 @@
+﻿global using SmartLibrary.Common.Models;
+global using SmartLibrary.Services;
+global using SmartLibrary.Common.Services;
+global using SmartLibrary.Localization;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using SmartLibrary.Common.ViewModels;
+global using SmartLibrary.Views;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Diagnostics;
+global using System.Globalization;
+global using System.Runtime.CompilerServices;
+global using System.Text.Json;
+global using System.Threading.Tasks;
+global using System.Linq;

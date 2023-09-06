@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
+             xmlns:c="clr-namespace:SmartLibrary.Converters"
+             xmlns:l="clr-namespace:SmartLibrary.Localization;assembly=SmartLibrary.Localization"
+			 x:Class="SmartLibrary.Views.MainPage"
+			 x:DataType="vm:MainViewModel" Title="{Binding Title}">
+
+    <StackLayout Spacing="10" x:Name="theParent">
+        <Label Text="Userdaten" StyleClass="SubTitle"/>
+        <Grid Margin="8" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Label Text="{x:Static l:Strings.WhoAreYou}" VerticalOptions="Center" />
+            <Entry Placeholder="Name eingeben" Text="{Binding UserName}" VerticalOptions="Center" Grid.Column="1" />
+        </Grid>
+        <Button Text="Ok" HorizontalOptions="Center" MinimumWidthRequest="100" Clicked="ChangeResource" Command="{Binding SetUserCommand}"/>
+    </StackLayout>
+</ContentPage>

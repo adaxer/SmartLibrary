@@ -1,0 +1,10 @@
+﻿namespace SmartLibrary;
+
+public partial class AppShell : Shell
+{
+	public AppShell()
+	{
+		InitializeComponent();
+		Routing.RegisterRoute(nameof(SearchDetailPage), typeof(SearchDetailPage));
+	}
+}
