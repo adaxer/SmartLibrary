@@ -19,6 +19,6 @@
                 <Label Text="{Binding Book.Info.Description}" Style="{StaticResource BodyLabelStyle}" />
             </VerticalStackLayout>
         </ScrollView>
-        <Button Text="Teilen" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+        <Button Text="Teilen" Command="{Binding SaveCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
     </Grid>
 </ContentPage>

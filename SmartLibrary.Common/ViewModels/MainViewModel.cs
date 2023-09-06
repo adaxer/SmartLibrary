@@ -4,9 +4,10 @@ namespace SmartLibrary.Common.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
 {
-    public MainViewModel(ILocationService locationService)
+    public MainViewModel(ILocationService locationService, IUserService userService)
     {
         this.locationService = locationService;
+        this.userService = userService;
         SetWelcome();
     }
 
@@ -26,6 +27,7 @@ public partial class MainViewModel : BaseViewModel
 
     string userName = string.Empty;
     private readonly ILocationService locationService;
+    private readonly IUserService userService;
 
     public string UserName
     {
@@ -44,6 +46,7 @@ public partial class MainViewModel : BaseViewModel
     {
         // Vielleicht mit UserService, der in App bekannt ist
         Title = $"{Strings.Welcome}, {UserName}";
+        userService.UserName = UserName;
         return Task.CompletedTask;
     }
 }

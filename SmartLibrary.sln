@@ -5,9 +5,15 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLibrary", "SmartLibrary\SmartLibrary.csproj", "{FA07A218-4347-49B6-9ABB-7C0B17758CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLibrary.Common", "SmartLibrary.Common\SmartLibrary.Common.csproj", "{FFAF3532-AA79-464E-AFEC-333C7E1F355A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLibrary.Common", "SmartLibrary.Common\SmartLibrary.Common.csproj", "{FFAF3532-AA79-464E-AFEC-333C7E1F355A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLibrary.Localization", "SmartLibrary.Localization\SmartLibrary.Localization.csproj", "{A5437F40-3E25-426F-BA50-685BAF1440BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLibrary.Localization", "SmartLibrary.Localization\SmartLibrary.Localization.csproj", "{A5437F40-3E25-426F-BA50-685BAF1440BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLibrary.Data", "SmartLibrary.Data\SmartLibrary.Data.csproj", "{28F621E0-E8F7-4725-B1D1-7015C6FBB86A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartLibrary.Api", "SmartLibrary.Api\SmartLibrary.Api.csproj", "{2708A8EB-1341-4BFE-9F8D-66CF9D71203F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTestClient", "ApiTestClient\ApiTestClient.csproj", "{05102E18-D266-4F7F-9D76-E1D526636A91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +35,18 @@ Global
 		{A5437F40-3E25-426F-BA50-685BAF1440BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5437F40-3E25-426F-BA50-685BAF1440BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5437F40-3E25-426F-BA50-685BAF1440BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F621E0-E8F7-4725-B1D1-7015C6FBB86A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F621E0-E8F7-4725-B1D1-7015C6FBB86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F621E0-E8F7-4725-B1D1-7015C6FBB86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F621E0-E8F7-4725-B1D1-7015C6FBB86A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2708A8EB-1341-4BFE-9F8D-66CF9D71203F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2708A8EB-1341-4BFE-9F8D-66CF9D71203F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2708A8EB-1341-4BFE-9F8D-66CF9D71203F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2708A8EB-1341-4BFE-9F8D-66CF9D71203F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05102E18-D266-4F7F-9D76-E1D526636A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05102E18-D266-4F7F-9D76-E1D526636A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05102E18-D266-4F7F-9D76-E1D526636A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05102E18-D266-4F7F-9D76-E1D526636A91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

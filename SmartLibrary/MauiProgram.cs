@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SmartLibrary.Common.Interfaces;
+using SmartLibrary.Data;
 //using SmartLibrary.Platforms;
 
 namespace SmartLibrary;
@@ -27,6 +29,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         builder.Services.AddSingleton<IBookService, BookService>();
         builder.Services.AddSingleton<IRestService, RestService>();
+        builder.Services.AddSingleton<IUserService, UserService>();
+        builder.Services.AddTransient<IBookStorage, BookStorage>();
+        builder.Services.AddSingleton<IBookShareClient, BookShareClient>();
+        builder.Services.AddSingleton<IPubSubService, PubSubService>();
 
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<MainPage>();
@@ -43,12 +49,17 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<NewsPage>();
 
+        builder.Services.AddSingleton(sp => sp.GetRequiredService<IBookShareClient>() as IRequireInitializeAsync);
+
+        builder.Services.AddDbContext<BooksContext>(options =>
+                options.UseSqlite("Filename=Books.db"));
+
         // Platform-Abhängigkeiten
-//#if WINDOWS
-//        builder.Services.AddSingleton<IPlatform, WinPlatform>();
-//#elif ANDROID
-//        builder.Services.AddSingleton<IPlatform, DroidPlatform>();
-//#endif
+        //#if WINDOWS
+        //        builder.Services.AddSingleton<IPlatform, WinPlatform>();
+        //#elif ANDROID
+        //        builder.Services.AddSingleton<IPlatform, DroidPlatform>();
+        //#endif
 
         // Damit ist das obige unnötig
         new Registrar().RegisterDependencies(builder.Services);

@@ -1,48 +1,43 @@
-﻿namespace SmartLibrary.Common.ViewModels;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using SmartLibrary.Common.Messages;
 
-public partial class NewsViewModel : BaseViewModel
+namespace SmartLibrary.Common.ViewModels;
+
+public partial class NewsViewModel : BaseViewModel, IRecipient<SharedBookMessage>, IRecipient<BookSavedMessage>
 {
-	readonly SampleDataService dataService;
+    private readonly INavigationService navigator;
+    private readonly IBookStorage storage;
 
-	[ObservableProperty]
-	bool isRefreshing;
+    public NewsViewModel(INavigationService navigator, IBookStorage storage, IPubSubService pubSubService)
+    {
+        Title = "Shared Pages";
+        this.navigator = navigator;
+        this.storage = storage;
+        pubSubService.Subscribe<SharedBookMessage>(this);
+        pubSubService.Subscribe<BookSavedMessage>(this);
+        LoadData();
+    }
 
-	[ObservableProperty]
-	ObservableCollection<SampleItem> items;
+    [ObservableProperty]
+    ICollection<SavedBook> savedBooks;
 
-	public NewsViewModel(SampleDataService service)
-	{
-		dataService = service;
-	}
+    [ObservableProperty]
+    ICollection<SavedBook> sharedBooks =new ObservableCollection<SavedBook>();
 
-	[RelayCommand]
-	private async void OnRefreshing()
-	{
-		IsRefreshing = true;
+    public async void LoadData()
+    {
+        IsBusy = true;
+        SavedBooks = new ObservableCollection<SavedBook>(await storage.GetSavedBooks());
+        IsBusy = false;
+    }
 
-		try
-		{
-			await LoadDataAsync();
-		}
-		finally
-		{
-			IsRefreshing = false;
-		}
-	}
+    public void Receive(SharedBookMessage message)
+    {
+        SharedBooks.Add(message.Value);
+    }
 
-	[RelayCommand]
-	public async Task LoadMore()
-	{
-		var items = await dataService.GetItems();
-
-		foreach (var item in items)
-		{
-			Items.Add(item);
-		}
-	}
-
-	public async Task LoadDataAsync()
-	{
-		Items = new ObservableCollection<SampleItem>(await dataService.GetItems());
-	}
+    public void Receive(BookSavedMessage message)
+    {
+        LoadData();
+    }
 }

@@ -3,7 +3,7 @@ using SmartLibrary.Common.Interfaces;
 
 namespace SmartLibrary.Common.ViewModels;
 
-public partial class SearchViewModel : BaseViewModel, IRecipient<Book>
+public partial class SearchViewModel : BaseViewModel
 {
     readonly IBookService bookService;
     private readonly INavigationService navigationService;
@@ -22,7 +22,6 @@ public partial class SearchViewModel : BaseViewModel, IRecipient<Book>
         bookService = service;
         this.navigationService = navigationService;
         Title = "Suche";
-        WeakReferenceMessenger.Default.Register(this);
     }
 
     [RelayCommand]
@@ -82,10 +81,5 @@ public partial class SearchViewModel : BaseViewModel, IRecipient<Book>
         {
             IsBusy = false;
         }
-    }
-
-    public void Receive(Book message)
-    {
-        Books.Insert(0,message);
     }
 }
