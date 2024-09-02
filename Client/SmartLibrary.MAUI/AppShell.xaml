@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+	x:Class="SmartLibrary.MAUI.AppShell"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:views="clr-namespace:SmartLibrary.MAUI.Views"
+	xmlns:local="clr-namespace:SmartLibrary">
+
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="Main"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:MainPage}"
+		Route="MainPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="Search"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:SearchPage}"
+		Route="SearchPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="News"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:NewsPage}"
+		Route="NewsPage" />
+</Shell>

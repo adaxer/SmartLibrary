@@ -1,0 +1,11 @@
+﻿global using System.Globalization;
+global using Newtonsoft.Json;
+global using SmartLibrary.MAUI.Services;
+global using SmartLibrary.Core.Localization;
+global using SmartLibrary.MAUI.Views;
+global using SmartLibrary.Core.Services;
+global using SmartLibrary.Data;
+global using SmartLibrary.Core.Interfaces;
+global using SmartLibrary.Common.Services;
+global using SmartLibrary.Common.Interfaces;
+global using SmartLibrary.Common.ViewModels;

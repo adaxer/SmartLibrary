@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns:v="clr-namespace:SmartLibrary.MAUI.Views"
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
+             xmlns:c="clr-namespace:SmartLibrary.MAUI.Converters"
+             xmlns:l="clr-namespace:SmartLibrary.Core.Localization;assembly=SmartLibrary.Localization"
+			 x:Class="SmartLibrary.MAUI.Views.LoginPage"
+			 x:DataType="vm:LoginViewModel" Title="{Binding Title}">
+
+    <VerticalStackLayout>
+        <Label Text="{x:Static l:Strings.UserName}" />
+        <Entry Text="{Binding UserName, Mode=TwoWay}" Placeholder="{x:Static l:Strings.EnterUserName}" />
+        <Label Text="Email" />
+        <Entry Text="{Binding Email, Mode=TwoWay}" Placeholder="{x:Static l:Strings.EnterEmail}" />
+        <Label Text="{x:Static l:Strings.Password}" />
+        <Entry Text="{Binding Password, Mode=TwoWay}" IsPassword="True" Placeholder="{x:Static l:Strings.EnterPassword}" />
+        <HorizontalStackLayout>
+            <Button Text="{x:Static l:Strings.SubmitLogin}" Command="{Binding LoginCommand}" />
+            <Button Text="{x:Static l:Strings.Cancel}" Command="{Binding CancelCommand}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</v:BasePage>

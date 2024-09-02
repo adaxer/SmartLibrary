@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="SmartLibrary.Wpf.Views.DetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:b="clr-namespace:SmartLibrary.Wpf.Behaviors"
+             xmlns:l="clr-namespace:SmartLibrary.Core.Localization;assembly=SmartLibrary.Localization"
+             xmlns:c="clr-namespace:SmartLibrary.Wpf.Controls"
+             xmlns:local="clr-namespace:SmartLibrary.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type c:LabelAndUnit}">
+            <Setter Property="LabelStyle" Value="{StaticResource MaterialDesignTitleSmallTextBlock}" />
+        </Style>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Book.Info.ImageLinks.Large}" VerticalAlignment="Top"/>
+        <StackPanel Grid.Column="1" Margin="12" Grid.IsSharedSizeScope="True">
+            <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
+                <TextBlock Style="{StaticResource MaterialDesignTitleMediumTextBlock}" Text="{Binding Book.Info.Title}"/>
+            </c:LabelAndUnit>
+            <c:LabelAndUnit Label="{x:Static l:Strings.SubTitle}" >
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Text="{Binding Book.Info.SubTitle}"/>
+            </c:LabelAndUnit>
+            <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
+                <TextBlock Text="{Binding Book.Info.AuthorInfo}"/>
+            </c:LabelAndUnit>
+            <c:LabelAndUnit Margin="0 16" Label="{x:Static l:Strings.Description}" >
+                <WebBrowser MaxHeight="500" MaxWidth="600">
+                    <i:Interaction.Behaviors>
+                        <b:WebBrowserBehavior Html="{Binding Book.Info.Description}" />
+                    </i:Interaction.Behaviors>
+                </WebBrowser>
+            </c:LabelAndUnit>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.IsSharedSizeScope="True">
+                    <c:LabelAndUnit Label="{x:Static l:Strings.Publisher}" >
+                        <TextBlock Text="{Binding Book.Info.Publisher}"/>
+                    </c:LabelAndUnit>
+                    <c:LabelAndUnit Label="{x:Static l:Strings.PublishDate}" >
+                        <TextBlock Text="{Binding Book.Info.PublishDate}"/>
+                    </c:LabelAndUnit>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
+                    <c:LabelAndUnit Label="{x:Static l:Strings.Pages}" Unit="Pages">
+                        <TextBlock Text="{Binding Book.Info.Pages}"/>
+                    </c:LabelAndUnit>
+                    <c:LabelAndUnit Label="{x:Static l:Strings.Price}" Unit="{Binding Book.SaleInfo.ListPrice.Currency}">
+                        <TextBlock Text="{Binding Book.SaleInfo.ListPrice.Amount}"/>
+                    </c:LabelAndUnit>
+                </StackPanel>
+            </Grid>
+            <Button Margin="0 16" MinWidth="100" Content="{x:Static l:Strings.Share}" Command="{Binding SaveCommand}"  HorizontalAlignment="Left" Visibility="{Binding CanShare, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

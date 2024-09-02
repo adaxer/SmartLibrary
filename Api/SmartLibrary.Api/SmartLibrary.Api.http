@@ -1,0 +1,59 @@
+@url = https://localhost:7023
+@user=alice
+@password=123Admin!
+
+POST {{url}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "{{user}}",
+    "password": "{{password}}",
+    "email": "{{user}}@example.com"
+}
+
+###
+
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{user}}",
+  "password": "{{password}}"
+}
+
+###
+
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQzZmE4N2I3LTNhMDItNDNlOC04OGI5LTg4MGZkZDMwZThhZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGljZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsaWNlQGJvYi5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiVXNlciIsIkFkbWluIl0sImV4cCI6MTcyNDY3MDcyNywiaXNzIjoic29tZWF1dGhvcml0eS5jb20iLCJhdWQiOiJteWFwaS5jb20ifQ.LqOQ2YhaN7Jns1-w2DRnEPdufTDiifJDhTI2m7_UOEs
+
+GET {{url}}/auth/userinfo
+Authorization: Bearer {{token}}
+
+###
+
+@refreshToken=x
+
+POST {{url}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+###
+
+Post {{url}}/books/save
+Content-Type: application/json
+
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "bookId": "ISBN-Bla",
+  "title": "A cool book",
+  "userName": "Chuck Norris",
+  "saveDate": "2024-08-27T14:30:58.006Z",
+  "notes": "Check this out man!",
+  "location": {
+    "latitude": 47,
+    "longitude": 12
+  }
+}
+###
+
