@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns:v="clr-namespace:SmartLibrary.MAUI.Views"
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
+             xmlns:l="clr-namespace:SmartLibrary.Core.Localization;assembly=SmartLibrary.Localization"
+			 xmlns:m="clr-namespace:SmartLibrary.Core.Models;assembly=SmartLibrary.Core"
+			 x:Class="SmartLibrary.MAUI.Views.SearchPage"
+			 x:DataType="vm:SearchViewModel" Title="{Binding Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <SearchBar Placeholder="{x:Static l:Strings.Search}" Text="{Binding SearchText}" SearchCommand="{Binding SearchCommand}"/>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" Margin="30,20,10,0" Command="{Binding RefreshingCommand}" Grid.Row="1">
+            <CollectionView ItemsSource="{Binding Books}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}" x:Name="theList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Book">
+                        <Grid>
+                            <Frame Margin="4" Padding="4">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Image Source="{Binding Info.ImageLinks.SmallThumbnail}" WidthRequest="60" VerticalOptions="Start" Margin="8"/>
+                                    <Grid Grid.Column="1" RowDefinitions="Auto,*" Margin="8,0">
+                                    <Label Text="{Binding Info.Title}" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}" />
+                                        <Label Margin="0,4" Text="{Binding Info.Description}" Grid.Row="1" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource SecondaryBrush}, Dark={StaticResource SecondaryBrush}}" />
+
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                            <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchViewModel}}, Path=IsBusy}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</v:BasePage>

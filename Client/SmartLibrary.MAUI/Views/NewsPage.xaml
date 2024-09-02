@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns:v="clr-namespace:SmartLibrary.MAUI.Views"
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
+             xmlns:m="clr-namespace:SmartLibrary.Core.Models;assembly=SmartLibrary.Core"
+			 x:Class="SmartLibrary.MAUI.Views.NewsPage"
+			 x:DataType="vm:NewsViewModel" >
+
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="m:SavedBook" x:Key="template">
+            <ViewCell>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="{Binding UserName}" Style="{StaticResource BodyLabelStyle}" />
+                    <Label Grid.Column="1" Text="{Binding SaveDate, StringFormat='{0:dd.MM.yy HH:mm}'}" Style="{StaticResource BodyLabelStyle}" />
+                    <Label Grid.Column="2" Text="{Binding Title}" Style="{StaticResource BodyLabelStyle}" />
+                    <Label Grid.Column="3" Text="{Binding Notes}" Style="{StaticResource BodyLabelStyle}" />
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto,*" >
+        <Label Text="SavedBooks" StyleClass="Title"/>
+        <ListView ItemsSource="{Binding SavedBooks}" HasUnevenRows="True" ItemTemplate="{StaticResource template}" Grid.Row="1"/>
+        <Label Text="SharedBooks" Grid.Row="2" StyleClass="Title"/>
+        <ListView ItemsSource="{Binding SharedBooks}" HasUnevenRows="True" ItemTemplate="{StaticResource template}" Grid.Row="3"/>
+            <Frame BackgroundColor="#22000000" IsVisible="{Binding IsBusy}" Grid.RowSpan="4">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Frame>
+    </Grid>
+
+</v:BasePage>
