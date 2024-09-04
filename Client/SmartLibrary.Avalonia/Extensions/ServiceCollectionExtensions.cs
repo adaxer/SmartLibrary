@@ -13,6 +13,7 @@ public static class ServiceCollectionExtensions
     public static void AddCommonServices(this IServiceCollection services)
     {
         services.AddSingleton<MainViewModel>();
+        services.AddTransient<LoginViewModel>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
         services.AddTransient<IUserClient, UserClient>();
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
