@@ -18,7 +18,6 @@ public class UserClient : IUserClient
         _client = client;
         _logger = logger;
         _secureStorage = secureStorage;
-        // UserInfo laden
     }
 
     public string? UserName => _userInfo?.UserName;
