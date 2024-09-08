@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using SmartLibrary.Common.ViewModels;
-
-namespace SmartLibrary.Wpf.Interfaces;
-
+﻿namespace SmartLibrary.Common.Interfaces;
 
 public interface IDialogService
 {

@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
+        services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddTransient<IUserClient, UserClient>();
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
       

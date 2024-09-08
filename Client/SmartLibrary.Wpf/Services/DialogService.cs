@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using SmartLibrary.Common.Interfaces;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Wpf.Controls;
-using SmartLibrary.Wpf.Interfaces;
 
 namespace SmartLibrary.Wpf.Services;
 

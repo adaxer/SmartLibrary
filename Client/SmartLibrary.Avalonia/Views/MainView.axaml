@@ -5,7 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SmartLibrary.Avalonia.Views.MainView">
-    <Grid >
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="MinWidth" Value="180"/>
+        </Style>
+    </UserControl.Styles>
+    <Grid Background="{DynamicResource MarkerBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

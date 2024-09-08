@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="250"
+             x:Class="SmartLibrary.Avalonia.Views.LoginView">
+    <StackPanel Margin="20" >
+        <Label Content="{x:Static l:Strings.UserName}"/>
+        <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="{x:Static l:Strings.EnterUserName}" />
+        <Label Content="{x:Static l:Strings.EnterEmail}"/>
+        <TextBox Text="{Binding Email, Mode=TwoWay}" Watermark="{x:Static l:Strings.EnterEmail}" />
+        <Label Content="{x:Static l:Strings.Password}"/>
+        <TextBox Text="{Binding Password, Mode=TwoWay}" Watermark="{x:Static l:Strings.EnterPassword}" PasswordChar="*" />
+        <Grid>
+            <UniformGrid Rows="1" Margin="0 20 0 0" HorizontalAlignment="Center">
+                <Button Content="{x:Static l:Strings.SubmitLogin}" Command="{Binding LoginCommand}" Margin="0 0 8 0" />
+                <Button Content="{x:Static l:Strings.Cancel}" Command="{Binding CancelCommand}" IsCancel="True"/>
+            </UniformGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

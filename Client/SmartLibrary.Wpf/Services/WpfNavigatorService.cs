@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Common.Interfaces;
 using SmartLibrary.Common.Messages;
 using SmartLibrary.Common.ViewModels;
-using SmartLibrary.Wpf.Interfaces;
 
 namespace SmartLibrary.Wpf.Services;
 
