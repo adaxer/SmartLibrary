@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using SmartLibrary.Avalonia.ViewModels;
 using SmartLibrary.Avalonia.Views;
 using SmartLibrary.Common.ViewModels;
 
@@ -27,19 +28,18 @@ public partial class App : Application
         // Creates a ServiceProvider containing services from the provided IServiceCollection
         var services = collection.BuildServiceProvider();
 
-        var vm = services.GetRequiredService<MainViewModel>();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
+            desktop.MainWindow = new ShellWindow
             {
-                DataContext = vm
+                DataContext = services.GetRequiredService<ShellViewModel>()
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = new MainView
             {
-                DataContext = vm
+                DataContext = services.GetRequiredService<MainViewModel>()
             };
         }
 

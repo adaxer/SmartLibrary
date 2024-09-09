@@ -1,10 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
-             x:Class="SmartLibrary.Avalonia.Views.AboutView">
+             x:Class="SmartLibrary.Avalonia.Views.AboutView"
+             x:DataType="vm:AboutViewModel">
     <Grid ColumnDefinitions="200, 200">
         <Image Source="/Images/smart.png" Stretch="Uniform" VerticalAlignment="Top"/>
         <StackPanel Margin="0 20" Grid.Column="1">

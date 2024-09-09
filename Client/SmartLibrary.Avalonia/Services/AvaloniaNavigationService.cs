@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
+using SmartLibrary.Avalonia.ViewModels;
 using SmartLibrary.Common.Interfaces;
-using SmartLibrary.Common.Messages;
 using SmartLibrary.Common.ViewModels;
 
 namespace SmartLibrary.Avalonia.Services;
@@ -26,7 +24,12 @@ public class AvaloniaNavigationService : INavigationService
 
     public Task NavigateAsync<T>(params (string key, object value)[] data) where T : BaseViewModel
     {
-        throw new NotImplementedException();
+        var shell = ((Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!).DataContext as ShellViewModel;
+        var target = _serviceProvider.GetService(typeof(T)) as BaseViewModel;
+        var parameters = data.ToDictionary(kv => kv.key, kv => kv.value);
+        shell!.CurrentModule = target;
+        target!.OnNavigatedTo(parameters);
+        return Task.CompletedTask;
     }
 
     public async Task<(bool result, T dialog)> ShowDialogAsync<T>(params (string key, object value)[] data) where T : BaseViewModel

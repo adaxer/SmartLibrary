@@ -1,10 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="250"
-             x:Class="SmartLibrary.Avalonia.Views.LoginView">
+             x:Class="SmartLibrary.Avalonia.Views.LoginView"
+             x:DataType="vm:LoginViewModel">
     <StackPanel Margin="20" >
         <Label Content="{x:Static l:Strings.UserName}"/>
         <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="{x:Static l:Strings.EnterUserName}" />

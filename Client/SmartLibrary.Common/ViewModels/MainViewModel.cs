@@ -28,13 +28,6 @@ public partial class MainViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    private async Task ShowAboutAsync()
-    {
-        var dialog = await _navigationService.ShowDialogAsync<AboutViewModel>(("Source", this));
-        SetWelcomeAsync();
-    }
-
-    [RelayCommand]
     private void Logout()
     {
         _userService.Logout();

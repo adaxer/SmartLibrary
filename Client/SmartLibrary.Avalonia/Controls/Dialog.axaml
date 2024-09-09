@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" MinWidth="300" MinHeight="200"
         x:Class="SmartLibrary.Avalonia.Dialog"
+        x:CompileBindings="False"
         Title="{Binding Title}">
     <ContentPresenter Content="{Binding}"/>
 </Window>

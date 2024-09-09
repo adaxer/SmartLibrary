@@ -13,7 +13,6 @@ using SmartLibrary.Core.Services;
 using SmartLibrary.Common.Services;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Common.Interfaces;
-using SmartLibrary.Wpf.Interfaces;
 using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Core.Localization;
 
