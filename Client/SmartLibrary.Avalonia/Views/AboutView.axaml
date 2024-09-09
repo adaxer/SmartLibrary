@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+             x:Class="SmartLibrary.Avalonia.Views.AboutView">
+    <Grid ColumnDefinitions="200, 200">
+        <Image Source="/Images/smart.png" Stretch="Uniform" VerticalAlignment="Top"/>
+        <StackPanel Margin="0 20" Grid.Column="1">
+        <TextBlock TextWrapping="Wrap" Text="{x:Static l:Strings.AboutText}"/>
+
+            <Button Content="Ok" Width="100" Margin="0 20" HorizontalContentAlignment="Center" Command="{Binding CloseCommand}"/>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

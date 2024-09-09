@@ -16,8 +16,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <StackPanel>
         <Button MaxWidth="200" Margin="0 8" Content="{x:Static l:Strings.LoginOrRegister}" Command="{Binding LoginCommand}" IsVisible="{Binding !IsLoggedIn}}"/>
         <Button MaxWidth="200" Margin="0 8" Content="{x:Static l:Strings.Logout}" Command="{Binding LogoutCommand}" IsVisible="{Binding IsLoggedIn}"/>
+        <Button Content="About" Command="{Binding ShowAboutCommand}" />
+        </StackPanel>
         <Image Source="/Images/smart.png" Grid.Row="1" Stretch="Uniform" />
     </Grid>
 </UserControl>

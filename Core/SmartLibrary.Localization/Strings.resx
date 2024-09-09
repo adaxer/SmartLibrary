@@ -189,4 +189,7 @@
   <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>SmartLibrary ist an App you can use to research books on any subject, and share your findings within the team.</value>
+  </data>
 </root>

@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginViewModel>();
+        services.AddTransient<AboutViewModel>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddTransient<IUserClient, UserClient>();

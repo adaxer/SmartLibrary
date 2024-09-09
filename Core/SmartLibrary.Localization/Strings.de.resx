@@ -127,4 +127,7 @@
   <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>SmartLibrary ist eine Applikation, mit der Du zu beliebigen Themen Bücher recherchieren und die gefundenen Titel im Team teilen kannst.</value>
+  </data>
 </root>

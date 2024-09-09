@@ -61,6 +61,15 @@ namespace SmartLibrary.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SmartLibrary ist an App you can use to research books on any subject, and share your findings within the team..
+        /// </summary>
+        public static string AboutText {
+            get {
+                return ResourceManager.GetString("AboutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author(s).
         /// </summary>
         public static string Authors {
