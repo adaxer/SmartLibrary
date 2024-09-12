@@ -8,6 +8,7 @@ using SmartLibrary.Common.Models;
 using SmartLibrary.Common.Services;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Core.Interfaces;
+using SmartLibrary.Core.Localization;
 using SmartLibrary.Core.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddTransient<IBookService, BookService>();
         services.AddTransient<IUserClient, UserClient>();
+        services.AddTransient<ILocalizationService, ResXLocalizationService>();
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
 

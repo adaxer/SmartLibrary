@@ -8,15 +8,17 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Common.Interfaces;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Common.Extensions;
+using SmartLibrary.Core.Localization;
 
 namespace SmartLibrary.Avalonia.ViewModels;
 public partial class ShellViewModel : BaseViewModel
 {
-    public ShellViewModel(IServiceProvider serviceProvider, INavigationService navigationService)
+    public ShellViewModel(IServiceProvider serviceProvider, INavigationService navigationService, ILocalizationService localizationService)
     {
         CurrentModule = serviceProvider.GetService<MainViewModel>();
         InitializeModules();
         _navigationService = navigationService;
+        Title = localizationService.Get("AppTitle");
     }
 
     [ObservableProperty]

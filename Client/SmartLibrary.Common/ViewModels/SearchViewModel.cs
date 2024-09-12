@@ -10,6 +10,7 @@ public partial class SearchViewModel : BaseViewModel
     private readonly INavigationService navigationService;
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SearchCommand))]
     string _searchText=string.Empty;
 
     [ObservableProperty]
@@ -25,8 +26,10 @@ public partial class SearchViewModel : BaseViewModel
         Title = "Suche";
     }
 
-    [RelayCommand]
-    private Task Search() => LoadDataAsync(); 
+    [RelayCommand(CanExecute =nameof(CanSearch))]
+    private Task SearchAsync() => LoadDataAsync();
+
+    bool CanSearch => SearchText is string text && text.Length >2;
 
     [RelayCommand]
     private async Task GoToDetailsAsync(Book book)

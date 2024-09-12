@@ -169,3 +169,11 @@ csharp_style_expression_bodied_local_functions = false:silent
 [*.vb]
 # Modifier preferences
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:suggestion
+###############################
+# ResX File formatter         #
+###############################
+[*.resx]
+resx_formatter_sort_entries=true
+resx_formatter_remove_xsd_schema=true
+resx_formatter_remove_documentation_comment=true
+resx_formatter_sort_comparer=OrdinalIgnoreCase

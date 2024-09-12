@@ -70,6 +70,15 @@ namespace SmartLibrary.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Smart Library - Find and share good BOOKZ!.
+        /// </summary>
+        public static string AppTitle {
+            get {
+                return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author(s).
         /// </summary>
         public static string Authors {
