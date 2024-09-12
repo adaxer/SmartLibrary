@@ -31,10 +31,4 @@
   <ItemGroup>
     <AvaloniaResource Include="..\SmartLibrary.MAUI\Resources\Images\smart.png" Link="Images\smart.png" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\ShellWindow.axaml.cs">
-      <DependentUpon>ShellWindow.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>

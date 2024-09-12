@@ -25,6 +25,9 @@
         <DataTemplate DataType="{x:Type vm:AboutViewModel}">
             <v:AboutView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SearchViewModel}">
+            <v:SearchView/>
+        </DataTemplate>
     </Application.DataTemplates>
 
 </Application>

@@ -25,7 +25,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IBookService, BookService>();
         services.AddTransient<IUserClient, UserClient>();
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
-      
+        services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
+
         var mock = Substitute.For<ISecureStorage>();
         mock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
             .Returns(callInfo => Task.FromResult(callInfo.Arg<UserInfo>()));

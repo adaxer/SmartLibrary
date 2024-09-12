@@ -5,10 +5,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="SmartLibrary.Avalonia.Views.ShellWindow"
+        x:Class="SmartLibrary.Avalonia.Views.ShellWindow" 
         x:DataType="vm:ShellViewModel"
-        Title="SmartLibrary.Avalonia">
-    <SplitView>
-        <ContentControl Content="{Binding CurrentModule}"/>
-    </SplitView>
+                Title="{Binding Title}">
+    <DockPanel>
+        <Grid ColumnDefinitions="Auto, *, Auto" DockPanel.Dock="Bottom" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="Zoom:" />
+                <Slider IsSnapToTickEnabled="True" TickFrequency="0.05" Minimum="0.5" Maximum="2" Value="1" x:Name="_zoomSlider" Margin="16 0" Width="200"/>
+                <TextBlock Text="{Binding #_zoomSlider.Value, StringFormat={}{0:F2}}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <TextBlock VerticalAlignment="Center" Text="Internet:" />
+                <TextBlock Margin="12 0" Text="{Binding InternetStatus^, FallbackValue='Checking Internet status'}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+        </Grid>
+        <SplitView IsPaneOpen="True" OpenPaneLength="200" DisplayMode="Inline">
+            <SplitView.Pane>
+                <ItemsControl ItemsSource="{Binding Modules}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Stretch" Content="{Binding Key}" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowModuleCommand}" CommandParameter="{Binding Value}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </SplitView.Pane>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <ContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
+                    <ContentControl.RenderTransform>
+                        <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
+                    </ContentControl.RenderTransform>
+                </ContentControl>
+            </ScrollViewer>
+        </SplitView>
+    </DockPanel>
 </Window>

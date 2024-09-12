@@ -36,6 +36,6 @@ public partial class BaseViewModel : ObservableObject
 
     public virtual void SetModalComplete(bool result)
     {
-        _waitForModalCompletion.SetResult(result);
+        _waitForModalCompletion?.SetResult(result);
     }
 }
