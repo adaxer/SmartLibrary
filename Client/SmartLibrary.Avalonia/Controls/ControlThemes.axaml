@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:controls="using:SmartLibrary.Avalonia.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel Spacing="20">
+            <controls:LabelAndUnit  />
+        </StackPanel>
+    </Design.PreviewWith>
+    
+    <!-- Add Resources Here -->
+
+    <!--<ControlTheme x:Key="{x:Type controls:LabelAndUnit}" TargetType="controls:LabelAndUnit">
+        <Setter Property="MinWidth" Value="30" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="Background" Value="Yellow"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="controls:LabelAndUnit">
+                <Ellipse Fill="{TemplateBinding Background}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>-->
+</ResourceDictionary>

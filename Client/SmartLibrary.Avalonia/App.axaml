@@ -4,15 +4,20 @@
              RequestedThemeVariant="Default"
             xmlns:vm="using:SmartLibrary.Common.ViewModels"
             xmlns:v="using:SmartLibrary.Avalonia.Views"          xmlns:sys="clr-namespace:System;assembly=System.Runtime">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
 
     <Application.Resources>
-        <SolidColorBrush Color="Yellow" x:Key="MarkerBrush" />
-        <sys:Double x:Key="ButtonMinWidth" >180</sys:Double>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Controls/ControlThemes.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush Color="Yellow" x:Key="MarkerBrush" />
+            <sys:Double x:Key="ButtonMinWidth" >180</sys:Double>
+        </ResourceDictionary>
     </Application.Resources>
 
     <Application.DataTemplates>
