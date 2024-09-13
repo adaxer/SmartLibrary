@@ -1,0 +1,3 @@
+﻿Create me an Avalonia Custom Drawn Control named Poly
+
+Now replace the Points property by an int Points and an int Gap. The minimum of Points should be 3 and the Maximum of Gap should be Points. OnRender should use Fill and Stroke. It should use the Points value to calculate points along a thought circle (its radius should be the minimum of width and height). Points of 3 should give a regular triangle, 4 give a square and so on. The drawing should draw from the first point to the point specified by Gap. Example Points=7, Gap=3 should draw from Point 0 to 3 to 6 to 9 (equal to 2) and so on, until it comes back to the Point 0

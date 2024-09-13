@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="using:CustomDrawDemo"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="CustomDrawDemo.MainWindow"
+        Title="CustomDrawDemo">
+	<Window.Resources>
+		<local:ColorStringToBrushConverter x:Key="c2b" />
+	</Window.Resources>
+	<Grid ColumnDefinitions="Auto,*">
+		<StackPanel >
+			<TextBlock Text="Points"/>
+			<NumericUpDown x:Name="points" Value="11" />
+			<TextBlock Text="Gap"/>
+			<NumericUpDown x:Name="gap" Value="2" />
+			<TextBlock Text="Line Width"/>
+			<NumericUpDown x:Name="line" Value="1" />
+			<TextBlock Text="Fill"/>
+			<TextBox x:Name="fill" Text="#FFAABB00" />
+			<TextBlock Text="Stroke"/>
+			<TextBox x:Name="stroke" Text="#FF000000" />
+		</StackPanel>
+		<local:Poly Grid.Column="1" Points="{Binding #points.Value}" Gap="{Binding #gap.Value}" Fill="{Binding #fill.Text, Converter={StaticResource c2b}}" Stroke="{Binding #stroke.Text, Converter={StaticResource c2b}}" StrokeThickness="{Binding #line.Value}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+	</Grid>
+</Window>
