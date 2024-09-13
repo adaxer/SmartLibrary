@@ -7,21 +7,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SmartLibrary.Avalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
-
-    <UserControl.Styles>
-        <Style Selector="Button">
-            <Setter Property="MinWidth" Value="180"/>
-        </Style>
-    </UserControl.Styles>
-    <Grid Background="{DynamicResource MarkerBrush}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button MaxWidth="200" Margin="0 8" Content="{x:Static l:Strings.LoginOrRegister}" Command="{Binding LoginCommand}" IsVisible="{Binding !IsLoggedIn}}"/>
-            <Button MaxWidth="200" Margin="0 8" Content="{x:Static l:Strings.Logout}" Command="{Binding LogoutCommand}" IsVisible="{Binding IsLoggedIn}"/>
-        </StackPanel>
         <Image Source="/Images/smart.png" Grid.Row="1" MaxWidth="400" Stretch="Uniform" />
     </Grid>
 </UserControl>

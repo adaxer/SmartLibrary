@@ -7,14 +7,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SmartLibrary.Avalonia.Views.ShellWindow"
-        x:DataType="vm:ShellViewModel" 
+        x:DataType="vm:ShellViewModel" TransparencyLevelHint="AcrylicBlur" Background="Transparent"
                 Title="{Binding Title}">
 
     <Window.DataTemplates>
         <DataTemplate DataType="{x:Type vm:MenuEntry}">
-            <Button Margin="8 4" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
+            <Button Foreground="White" Margin="8 4" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
                 <StackPanel Orientation="Horizontal">
-                    <!--<i:Icon Value="{Binding Icon}"/>-->
+                    <i:Icon Value="{Binding Icon}"/>
                     <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding $parent.((vm:ShellViewModel)DataContext).IsExpanded}" Margin="8 0"/>
                 </StackPanel>
             </Button>
@@ -36,10 +36,10 @@
 
         </Grid>
         
-        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" OpenPaneLength="240" DisplayMode="CompactInline">
+        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="#6066" OpenPaneLength="240" DisplayMode="CompactInline">
             <SplitView.Pane>
                 <DockPanel>
-                    <Button Margin="8" DockPanel.Dock="Top" Content="Open Pane" Command="{Binding ToggleExpandedCommand}"/>
+                    <Button Foreground="White"  Margin="8" DockPanel.Dock="Top" i:Attached.Icon="mdi-menu" Command="{Binding ToggleExpandedCommand}"/>
                     <Separator DockPanel.Dock="Top" Margin="8"/>
                     <ItemsControl ItemsSource="{Binding Modules}" DockPanel.Dock="Top"/>
                     <ItemsControl ItemsSource="{Binding Dialogs}" DockPanel.Dock="Bottom" />
