@@ -2,12 +2,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:v="using:SmartLibrary.Avalonia.Views"
         xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
+        xmlns:i="https://github.com/projektanker/icons.avalonia"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="SmartLibrary.Avalonia.Views.ShellWindow" 
-        x:DataType="vm:ShellViewModel"
+        x:Class="SmartLibrary.Avalonia.Views.ShellWindow"
+        x:DataType="vm:ShellViewModel" 
                 Title="{Binding Title}">
+
+    <Window.DataTemplates>
+        <DataTemplate DataType="{x:Type vm:MenuEntry}">
+            <Button Margin="8 4" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
+                <StackPanel Orientation="Horizontal">
+                    <!--<i:Icon Value="{Binding Icon}"/>-->
+                    <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding $parent.((vm:ShellViewModel)DataContext).IsExpanded}" Margin="8 0"/>
+                </StackPanel>
+            </Button>
+        </DataTemplate>
+    </Window.DataTemplates>
+
     <DockPanel>
         <Grid ColumnDefinitions="Auto, *, Auto" DockPanel.Dock="Bottom" >
             <StackPanel Orientation="Horizontal">
@@ -22,15 +35,16 @@
             </StackPanel>
 
         </Grid>
-        <SplitView IsPaneOpen="True" OpenPaneLength="200" DisplayMode="Inline">
+        
+        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" OpenPaneLength="240" DisplayMode="CompactInline">
             <SplitView.Pane>
-                <ItemsControl ItemsSource="{Binding Modules}" >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button HorizontalAlignment="Stretch" Content="{Binding Key}" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowModuleCommand}" CommandParameter="{Binding Value}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <DockPanel>
+                    <Button Margin="8" DockPanel.Dock="Top" Content="Open Pane" Command="{Binding ToggleExpandedCommand}"/>
+                    <Separator DockPanel.Dock="Top" Margin="8"/>
+                    <ItemsControl ItemsSource="{Binding Modules}" DockPanel.Dock="Top"/>
+                    <ItemsControl ItemsSource="{Binding Dialogs}" DockPanel.Dock="Bottom" />
+                    <Rectangle/>
+                </DockPanel>
             </SplitView.Pane>
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <ContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">

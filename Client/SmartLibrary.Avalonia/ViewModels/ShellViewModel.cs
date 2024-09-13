@@ -13,25 +13,45 @@ using SmartLibrary.Core.Localization;
 namespace SmartLibrary.Avalonia.ViewModels;
 public partial class ShellViewModel : BaseViewModel
 {
-    public ShellViewModel(IServiceProvider serviceProvider, INavigationService navigationService, ILocalizationService localizationService)
+    private readonly INavigationService _navigationService;
+    private readonly ILocalizationService _localizationService;
+
+    public ShellViewModel(MainViewModel main, INavigationService navigationService, ILocalizationService localizationService)
     {
-        CurrentModule = serviceProvider.GetService<MainViewModel>();
-        InitializeModules();
+        CurrentModule = main;
         _navigationService = navigationService;
-        Title = localizationService.Get("AppTitle");
+        _localizationService = localizationService;
+        Title = _localizationService.Get("AppTitle");
+        InitializeNavigation();
     }
 
     [ObservableProperty]
     BaseViewModel? _currentModule;
 
     [ObservableProperty]
-    ObservableCollection<KeyValuePair<string, Type>> _modules = new();
-    private readonly INavigationService _navigationService;
+    bool _isExpanded = true;
 
-    [RelayCommand(CanExecute = nameof(CanShowModule))]
-    private async Task ShowModuleAsync(Type type)
+    [ObservableProperty]
+    ObservableCollection<MenuEntry> _modules = new();
+
+    [ObservableProperty]
+    ObservableCollection<MenuEntry> _dialogs = new();
+
+    [RelayCommand]
+    private void ToggleExpanded() => IsExpanded ^= true;
+
+    [RelayCommand(CanExecute = nameof(CanShowItem))]
+    private async Task ShowItemAsync(MenuEntry entry)
     {
-        await _navigationService.NavigateAsync(type);
+        IsExpanded = false;
+        if (entry.IsModal)
+        {
+            await _navigationService.ShowDialogAsync(entry.TargetType);
+        }
+        else
+        {
+            await _navigationService.NavigateAsync(entry.TargetType);
+        }
     }
 
     public Task<string> InternetStatus => GetInternetStatusAsync();
@@ -42,12 +62,13 @@ public partial class ShellViewModel : BaseViewModel
         return "Internet is available";
     }
 
-    public bool CanShowModule(Type type) => !type.Equals(CurrentModule?.GetType());
+    public bool CanShowItem(MenuEntry entry) => entry.IsModal || !entry.TargetType.Equals(CurrentModule?.GetType());
 
-    private void InitializeModules()
+    private void InitializeNavigation()
     {
-        Modules.Add(new KeyValuePair<string, Type>("Welcome", typeof(MainViewModel)));
-        Modules.Add(new KeyValuePair<string, Type>("About", typeof(AboutViewModel)));
-        Modules.Add(new KeyValuePair<string, Type>("Search", typeof(SearchViewModel)));
+        Modules.Add(new MenuEntry(_localizationService.Get("Main"), typeof(MainViewModel), "human-greeting-variant"));
+        Modules.Add(new MenuEntry(_localizationService.Get("Search"), typeof(SearchViewModel), "magnify"));
+        Dialogs.Add(new MenuEntry(_localizationService.Get("About"), typeof(AboutViewModel), "information-outline", true));
+        Dialogs.Add(new MenuEntry(_localizationService.Get("LoginOrRegister"), typeof(LoginViewModel), "login", true));
     }
 }
