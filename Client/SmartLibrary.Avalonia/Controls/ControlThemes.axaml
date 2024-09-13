@@ -2,21 +2,41 @@
                     xmlns:controls="using:SmartLibrary.Avalonia.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <StackPanel Spacing="20">
-            <controls:LabelAndUnit  />
+        <StackPanel Spacing="10" Grid.IsSharedSizeScope="True">
+            <controls:LabelAndUnit Label="UserName" LabelMargin="8">
+                <TextBox Text="Mein Name ist"/>
+            </controls:LabelAndUnit>
+            <controls:LabelAndUnit Label="Email" LabelMargin="8">
+                <TextBox Text="bob@bob.de"/>
+            </controls:LabelAndUnit>
+            <controls:LabelAndUnit Label="Password" LabelMargin="8">
+                <TextBox PasswordChar="*" Text="password"/>
+            </controls:LabelAndUnit>
         </StackPanel>
     </Design.PreviewWith>
-    
+
     <!-- Add Resources Here -->
 
-    <!--<ControlTheme x:Key="{x:Type controls:LabelAndUnit}" TargetType="controls:LabelAndUnit">
-        <Setter Property="MinWidth" Value="30" />
-        <Setter Property="MinHeight" Value="10" />
-        <Setter Property="Background" Value="Yellow"/>
+    <ControlTheme x:Key="{x:Type controls:LabelAndUnit}" TargetType="controls:LabelAndUnit">
+        <Setter Property="MinWidth" Value="200"/>
         <Setter Property="Template">
             <ControlTemplate TargetType="controls:LabelAndUnit">
-                <Ellipse Fill="{TemplateBinding Background}" />
+                <Grid Margin="0 0 0 4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="Label"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition SharedSizeGroup="Content"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition SharedSizeGroup="Unit"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Label}"/>
+                    <Rectangle Grid.Column="1" Width="{TemplateBinding LabelMargin}"/>
+                    <ContentPresenter MinWidth="{TemplateBinding MinWidth}" Content="{TemplateBinding Content}" Grid.Column="2"/>
+                    <Rectangle Grid.Column="3" Width="{TemplateBinding UnitMargin}"/>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="4" Text="{TemplateBinding Unit}"/>
+                </Grid>
             </ControlTemplate>
         </Setter>
-    </ControlTheme>-->
+    </ControlTheme>
+
 </ResourceDictionary>
