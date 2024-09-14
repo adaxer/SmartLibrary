@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:SmartLibrary.Wpf.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" MinWidth="300" >
+             d:DesignHeight="210" d:DesignWidth="300" MinWidth="300" >
     <StackPanel Margin="20" Grid.IsSharedSizeScope="True">
 
         <controls:LabelAndUnit Label="{x:Static l:Strings.UserName}">
@@ -18,7 +18,7 @@
             <TextBox Text="{Binding Email, Mode=TwoWay}" materialDesign:HintAssist.Hint="{x:Static l:Strings.EnterEmail}" />
         </controls:LabelAndUnit>
         <controls:LabelAndUnit Label="{x:Static l:Strings.Password}">
-            <PasswordBox Password="123User!" PasswordChanged="PasswordBox_PasswordChanged" materialDesign:HintAssist.Hint="{x:Static l:Strings.EnterPassword}" />
+            <PasswordBox x:Name="_passwordBox" Password="123User!" PasswordChanged="PasswordBox_PasswordChanged" materialDesign:HintAssist.Hint="{x:Static l:Strings.EnterPassword}" />
         </controls:LabelAndUnit>
         <TextBlock Style="{StaticResource ErrorText}" Text="{Binding ErrorMessage}" Visibility="{Binding ErrorMessage, Converter={StaticResource ShowString}}" />
         <Grid>

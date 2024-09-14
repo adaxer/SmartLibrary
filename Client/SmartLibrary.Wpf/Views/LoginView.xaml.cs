@@ -29,7 +29,7 @@ public partial class LoginView : UserControl
     {
         if (DataContext is LoginViewModel lvm)
         {
-            lvm.Password = (sender as PasswordBox).Password;
+            lvm.Password = _passwordBox.Password;
         }
     }
 }
