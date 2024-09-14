@@ -79,6 +79,9 @@
   <data name="SearchText" xml:space="preserve">
     <value>Search for</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
   </data>

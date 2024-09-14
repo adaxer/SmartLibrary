@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SmartLibrary.Avalonia.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+    <DockPanel>
+        
+    <Grid ColumnDefinitions="*,*">
+        <ThemeVariantScope RequestedThemeVariant="Light">
+        <StackPanel Background="{DynamicResource SystemRegionBrush}">
+            <Label Foreground="{DynamicResource SpecialTextBrush}" Content="Light Theme Scope" />
+            <Button Content="Normal Button"/>
+            <Button Content="Accent Button" Background="{DynamicResource AccentButtonBackground}"/>
+        </StackPanel>
+        </ThemeVariantScope>
+        <ThemeVariantScope Grid.Column="1" RequestedThemeVariant="Dark">
+            <StackPanel Background="{DynamicResource SystemRegionBrush}">
+                <Label Foreground="{DynamicResource SpecialTextBrush}" Content="Dark Theme Scope" />
+                <Button Content="Normal Button"/>
+                <Button Content="Accent Button" Background="{DynamicResource AccentButtonBackground}"/>
+            </StackPanel>
+        </ThemeVariantScope>
+    </Grid>
+    </DockPanel>
+</UserControl>
