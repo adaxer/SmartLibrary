@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SmartLibrary.Avalonia.Views.ShellWindow"
-        x:DataType="vm:ShellViewModel" TransparencyLevelHint="AcrylicBlur" Background="Transparent"
+        x:DataType="vm:ShellViewModel" TransparencyLevelHint="AcrylicBlur" Background="{DynamicResource ShellBackground}"
                 Title="{Binding Title}">
 
     <Window.DataTemplates>
@@ -36,7 +36,7 @@
 
         </Grid>
         
-        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="#6066" OpenPaneLength="240" DisplayMode="CompactInline">
+        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="{StaticResource SplitPaneBrush}" OpenPaneLength="240" DisplayMode="CompactInline">
             <SplitView.Pane>
                 <DockPanel>
                     <Button Foreground="White"  Margin="8" DockPanel.Dock="Top" i:Attached.Icon="mdi-menu" Command="{Binding ToggleExpandedCommand}"/>
