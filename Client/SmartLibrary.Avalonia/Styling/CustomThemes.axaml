@@ -3,9 +3,15 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
             <SolidColorBrush x:Key="SpecialTextBrush">Brown</SolidColorBrush>
+            <SolidColorBrush Color="#0000" x:Key="ShellBackgroundBrush"/>
+            <SolidColorBrush Color="#6066" x:Key="PaneBackgroundBrush"/>
+            <SolidColorBrush Color="#6FFF" x:Key="SystemRegionBrush"/>
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <SolidColorBrush x:Key="SpecialTextBrush">Yellow</SolidColorBrush>
+            <SolidColorBrush Color="#6000" x:Key="ShellBackgroundBrush" />
+            <SolidColorBrush Color="#60BB" x:Key="PaneBackgroundBrush"/>
+            <SolidColorBrush Color="#6000" x:Key="SystemRegionBrush"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

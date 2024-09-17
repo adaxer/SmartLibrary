@@ -17,8 +17,6 @@ xmlns:vm="using:SmartLibrary.Common.ViewModels"
                 <ResourceInclude Source="/Styling/CustomThemes.axaml"/>
                 <ResourceInclude Source="/Controls/ControlThemes.axaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush Color="#6066" x:Key="SplitPaneBrush" />
-            <SolidColorBrush Color="#0000" x:Key="ShellBackground" />
             <sys:Double x:Key="ButtonMinWidth" >180</sys:Double>
         </ResourceDictionary>
     </Application.Resources>

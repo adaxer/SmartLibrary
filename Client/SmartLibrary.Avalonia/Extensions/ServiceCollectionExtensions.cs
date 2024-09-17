@@ -34,6 +34,7 @@ public static class ServiceCollectionExtensions
         // Platform Services
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
+        services.AddSingleton<IThemeService, AvaloniaThemeService>();
         var mock = Substitute.For<ISecureStorage>();
         mock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
             .Returns(callInfo => Task.FromResult(callInfo.Arg<UserInfo>()));
