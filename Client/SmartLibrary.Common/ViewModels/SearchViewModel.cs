@@ -19,6 +19,9 @@ public partial class SearchViewModel : BaseViewModel
     [ObservableProperty]
     ObservableCollection<Book> _books=new();
 
+    [ObservableProperty]
+    private Book? _currentBook;
+
     public SearchViewModel(IBookService service, INavigationService navigationService)
     {
         bookService = service;
@@ -35,6 +38,14 @@ public partial class SearchViewModel : BaseViewModel
     private async Task GoToDetailsAsync(Book book)
     {
         await navigationService.NavigateAsync<DetailsViewModel>(("BookId", book.Id));
+    }
+
+    partial void OnCurrentBookChanged(Book? oldValue, Book? newValue)
+    {
+        if (newValue is Book book)
+        {
+           GoToDetailsCommand.Execute(book);
+        }
     }
 
     [RelayCommand]

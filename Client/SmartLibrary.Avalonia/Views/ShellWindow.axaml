@@ -35,7 +35,7 @@
             </StackPanel>
 
         </Grid>
-        
+
         <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="{DynamicResource PaneBackgroundBrush}" OpenPaneLength="240" DisplayMode="CompactInline">
             <SplitView.Pane>
                 <DockPanel>
@@ -46,13 +46,11 @@
                     <Rectangle/>
                 </DockPanel>
             </SplitView.Pane>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                <ContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
-                    <ContentControl.RenderTransform>
-                        <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
-                    </ContentControl.RenderTransform>
-                </ContentControl>
-            </ScrollViewer>
+            <ContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
+                <ContentControl.RenderTransform>
+                    <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
+                </ContentControl.RenderTransform>
+            </ContentControl>
         </SplitView>
     </DockPanel>
 </Window>
