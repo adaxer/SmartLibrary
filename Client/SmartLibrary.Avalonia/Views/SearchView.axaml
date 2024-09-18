@@ -1,6 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:m="using:SmartLibrary.Core.Models"
              xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,12 +11,31 @@
              x:DataType="vm:SearchViewModel">
     <Grid RowDefinitions="Auto, *">
         <DockPanel >
-            <Button Content="Start" DockPanel.Dock="Right" Command="{Binding SearchCommand}" />
+            <Button Content="Start" DockPanel.Dock="Right" Command="{Binding SearchCommand}" IsDefault="True"/>
             <TextBox Text="{Binding SearchText}" Watermark="Searchtext" />
         </DockPanel>
 
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Books}" DisplayMemberBinding="{Binding Info.Title}"/>
-        </ScrollViewer>
+        <DataGrid IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Books}" SelectedItem="{Binding CurrentBook, Mode=TwoWay}" GridLinesVisibility="Horizontal">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Image">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="m:Book">
+                            <Image MaxWidth="100" VerticalAlignment="Top" asyncImageLoader:ImageLoader.Source="{Binding Info.ImageLinks.Thumbnail}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Info">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="m:Book">
+                            <StackPanel Margin="8 4" MaxWidth="{Binding $parent[DockPanel].Bounds.Width}">
+                                <TextBlock Classes="h2" Text="{Binding Info.Title}" />
+                                <TextBlock Classes="subTitle" Text="{Binding Info.AuthorInfo}" />
+                                <TextBlock Margin="0 0 150 0" Classes="small" Text="{Binding Info.Description}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

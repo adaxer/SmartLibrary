@@ -24,7 +24,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<MainViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<AboutViewModel>();
-        services.AddTransient<SearchViewModel>();
+        services.AddSingleton<SearchViewModel>();
+        services.AddTransient<DetailsViewModel>();
 
         // Common Services
         services.AddTransient<IBookService, BookService>();
@@ -35,10 +36,16 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
         services.AddSingleton<IThemeService, AvaloniaThemeService>();
-        var mock = Substitute.For<ISecureStorage>();
-        mock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
+        var storageMock = Substitute.For<ISecureStorage>();
+        storageMock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
             .Returns(callInfo => Task.FromResult(callInfo.Arg<UserInfo>()));
-        services.AddSingleton<ISecureStorage>(mock);
+        services.AddSingleton<ISecureStorage>(storageMock);
+        var locationMock = Substitute.For<ILocationService>();
+        services.AddSingleton<ILocationService>(locationMock);
+        var bookStorageMock = Substitute.For<IBookStorage>();
+        services.AddSingleton<IBookStorage>(bookStorageMock);
+        var shareMock = Substitute.For<IBookShareClient>();
+        services.AddSingleton<IBookShareClient>(shareMock);
 
         // Http Clients
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));

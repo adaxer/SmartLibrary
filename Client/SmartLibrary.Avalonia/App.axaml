@@ -8,7 +8,13 @@ xmlns:vm="using:SmartLibrary.Common.ViewModels"
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme >
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light" Accent="Green" RegionColor="#6FFF"  />
+                <ColorPaletteResources x:Key="Dark" Accent="LightGreen" RegionColor="#6000" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         <StyleInclude Source="/Styling/CustomStyles.axaml"/>
     </Application.Styles>
 
@@ -34,6 +40,9 @@ xmlns:vm="using:SmartLibrary.Common.ViewModels"
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SearchViewModel}">
             <v:SearchView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DetailsViewModel}">
+            <v:DetailsView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type avm:SettingsViewModel}">
             <v:SettingsView/>
