@@ -5,10 +5,14 @@
              xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
              x:Class="SmartLibrary.Avalonia.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
-
+    <UserControl.Styles>
+    <Style Selector="controls|LabelAndUnit /template/ Grid">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    </UserControl.Styles>
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <controls:LabelAndUnit DockPanel.Dock="Top" Label="{x:Static l:Strings.Themes}">
@@ -19,14 +23,14 @@
         <Grid ColumnDefinitions="*,*">
             <ThemeVariantScope RequestedThemeVariant="Light">
                 <StackPanel Background="{DynamicResource SystemRegionBrush}">
-                    <Label Foreground="{DynamicResource SpecialTextBrush}" Content="Light Theme Scope" />
+                    <Label Classes="h1" Content="Light Theme Scope" />
                     <Button Content="Normal Button"/>
                     <Button Content="Accent Button" Background="{DynamicResource AccentButtonBackground}"/>
                 </StackPanel>
             </ThemeVariantScope>
             <ThemeVariantScope Grid.Column="1" RequestedThemeVariant="Dark">
                 <StackPanel Background="{DynamicResource SystemRegionBrush}">
-                    <Label Foreground="{DynamicResource SpecialTextBrush}" Content="Dark Theme Scope" />
+                    <Label Classes="h1" Foreground="{DynamicResource SpecialTextBrush}" Content="Dark Theme Scope" />
                     <Button Content="Normal Button"/>
                     <Button Content="Accent Button" Background="{DynamicResource AccentButtonBackground}"/>
                 </StackPanel>

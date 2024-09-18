@@ -7,11 +7,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SmartLibrary.Avalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <TextBlock Classes="h1" HorizontalAlignment="Center" Text="{x:Static l:Strings.Main}" />
         <Image Source="/Images/smart.png" Grid.Row="1" MaxWidth="400" Stretch="Uniform" />
     </Grid>
 </UserControl>

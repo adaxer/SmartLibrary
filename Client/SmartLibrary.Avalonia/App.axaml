@@ -9,6 +9,7 @@ xmlns:vm="using:SmartLibrary.Common.ViewModels"
 
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="/Styling/CustomStyles.axaml"/>
     </Application.Styles>
 
     <Application.Resources>

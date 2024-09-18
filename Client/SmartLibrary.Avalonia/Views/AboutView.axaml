@@ -4,7 +4,7 @@
              xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
              x:Class="SmartLibrary.Avalonia.Views.AboutView"
              x:DataType="vm:AboutViewModel">
     <Grid ColumnDefinitions="200, 200">
