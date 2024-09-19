@@ -15,7 +15,7 @@
             <TextBox Text="{Binding SearchText}" Watermark="Searchtext" />
         </DockPanel>
 
-        <DataGrid IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Books}" SelectedItem="{Binding CurrentBook, Mode=TwoWay}" GridLinesVisibility="Horizontal">
+        <DataGrid VerticalScroll="VerticalScroll" IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Books}" SelectedItem="{Binding CurrentBook, Mode=TwoWay}" GridLinesVisibility="Horizontal">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Image">
                     <DataGridTemplateColumn.CellTemplate>

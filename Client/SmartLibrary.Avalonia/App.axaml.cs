@@ -44,5 +44,9 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+
+#if AUTOMATE
+        services.GetService<Automate>()!.StartAsync();
+#endif
     }
 }
