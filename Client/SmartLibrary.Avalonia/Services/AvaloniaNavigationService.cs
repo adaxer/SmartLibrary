@@ -29,6 +29,7 @@ public class AvaloniaNavigationService : INavigationService
         var parameters = data.ToDictionary(kv => kv.key, kv => kv.value);
         shell!.CurrentModule = target;
         target!.OnNavigatedTo(parameters);
+        shell.ShowItemCommand.NotifyCanExecuteChanged();
         return Task.CompletedTask;
     }
 

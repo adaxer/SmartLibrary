@@ -12,9 +12,9 @@ public class BookService : IBookService
         _client = client;
     }
 
-    public async Task<BookQuery> BookQueryAsync(string text)
+    public async Task<BookQuery> BookQueryAsync(string text, int pageSize, int page)
     {
-        var result = await _client.GetFromJsonAsync<BookQuery>($"books/v1/volumes?q={text}&maxResults=40");
+        var result = await _client.GetFromJsonAsync<BookQuery>($"books/v1/volumes?q={text}&maxResults={pageSize}&startIndex={(page-1)*pageSize}");
 
         return result;
 

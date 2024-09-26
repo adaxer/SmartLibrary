@@ -80,7 +80,7 @@ public partial class SearchViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            var query = await bookService.BookQueryAsync(SearchText);
+            var query = await bookService.BookQueryAsync(SearchText, 5,1);
             Title = $"Suche ({query.Count} Treffer)";
             Books = new ObservableCollection<Book>(query.Books);
         }
