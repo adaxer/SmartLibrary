@@ -29,7 +29,7 @@
                 <TextBlock Text="{Binding #_zoomSlider.Value, StringFormat={}{0:F2}}" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="2">
+            <StackPanel x:Name="_internetCheck" Orientation="Horizontal" Grid.Column="2" Margin="0 0 -300 0">
                 <TextBlock VerticalAlignment="Center" Text="Internet:" />
                 <TextBlock Margin="12 0" Text="{Binding InternetStatus^, FallbackValue='Checking Internet status'}" VerticalAlignment="Center"/>
             </StackPanel>
