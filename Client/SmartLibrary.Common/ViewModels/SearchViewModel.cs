@@ -1,11 +1,13 @@
-﻿
-
-using SmartLibrary.Common.Interfaces;
+﻿using SmartLibrary.Common.Extensions;
 
 namespace SmartLibrary.Common.ViewModels;
 
 public partial class SearchViewModel : BaseViewModel
 {
+    private const int PageSize = 5;
+    private int _currentPage = 1;
+    
+
     readonly IBookService bookService;
     private readonly INavigationService navigationService;
 
@@ -21,6 +23,9 @@ public partial class SearchViewModel : BaseViewModel
 
     [ObservableProperty]
     private Book? _currentBook;
+
+    [ObservableProperty]
+    private int _pageCount = 0;
 
     public SearchViewModel(IBookService service, INavigationService navigationService)
     {
@@ -66,23 +71,28 @@ public partial class SearchViewModel : BaseViewModel
     [RelayCommand]
     public Task LoadMore()
     {
-        //var items = await bookService.GetItems();
-
-        //foreach (var item in items)
-        //{
-        //    Items.Add(item);
-        //}
+        if (_currentPage + 1 < PageCount)
+        {
+            return LoadDataAsync(++_currentPage);
+        }
         return Task.CompletedTask;
     }
 
-    private async Task LoadDataAsync()
+    private async Task LoadDataAsync(int page=1)
     {
         IsBusy = true;
         try
         {
-            var query = await bookService.BookQueryAsync(SearchText, 5,1);
-            Title = $"Suche ({query.Count} Treffer)";
+            var query = await bookService.BookQueryAsync(SearchText, PageSize,page);
+            PageCount = (query.Count / PageSize) + ((query.Count % PageSize == 0) ? 0 : 1);
+            if(page == 1)
+            {
             Books = new ObservableCollection<Book>(query.Books);
+            }
+            else
+            {
+                Books.AddRange(query.Books);
+            }
         }
         catch (Exception ex)
         {
