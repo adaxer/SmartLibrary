@@ -29,7 +29,13 @@
                         </Grid.ColumnDefinitions>
                         <Image MaxWidth="100" VerticalAlignment="Top" asyncImageLoader:ImageLoader.Source="{Binding Info.ImageLinks.Thumbnail}" />
                         <StackPanel Grid.Column="1" Margin="8 4" MaxWidth="{Binding #_textBox.Bounds.Width}">
-                            <TextBlock Classes="h2" Text="{Binding Info.Title}" />
+                            <TextBlock Classes="h2" Text="{Binding Info.Title}" >
+                                <TextBlock.Transitions>
+                                    <Transitions>
+                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+                                    </Transitions>
+                                </TextBlock.Transitions>
+                            </TextBlock>
                             <TextBlock Classes="subTitle" Text="{Binding Info.AuthorInfo}" />
                             <TextBlock Margin="0 0 150 0" Classes="small" Text="{Binding Info.Description}" />
                         </StackPanel>
