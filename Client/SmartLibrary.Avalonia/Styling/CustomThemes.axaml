@@ -5,11 +5,13 @@
             <SolidColorBrush x:Key="SpecialTextBrush">Brown</SolidColorBrush>
             <SolidColorBrush Color="#8FFF" x:Key="ShellBackgroundBrush"/>
             <SolidColorBrush Color="#6066" x:Key="PaneBackgroundBrush"/>
+            <SolidColorBrush Color="#4044" x:Key="BusyBackgroundBrush" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <SolidColorBrush x:Key="SpecialTextBrush">Yellow</SolidColorBrush>
             <SolidColorBrush Color="#6000" x:Key="ShellBackgroundBrush" />
             <SolidColorBrush Color="#60BB" x:Key="PaneBackgroundBrush"/>
+            <SolidColorBrush Color="#4088" x:Key="BusyBackgroundBrush" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

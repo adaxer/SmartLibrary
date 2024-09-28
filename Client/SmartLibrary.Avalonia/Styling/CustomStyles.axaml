@@ -3,7 +3,7 @@
     <Design.PreviewWith>
         <Border Padding="20" MaxWidth="250">
             <StackPanel>
-                <TextBlock Classes="h2" Text="TextBlock Lorem Ipsum TextBlock Lorem Ipsum " >
+                <TextBlock Classes="small status" Text="TextBlock Lorem Ipsum TextBlock Lorem Ipsum " >
                     <TextBlock.Transitions>
                         <Transitions>
                             <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
@@ -48,5 +48,11 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}" />
+    </Style>
+
+    <Style Selector="TextBlock.status">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="16 0" />
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
     </Style>
 </Styles>

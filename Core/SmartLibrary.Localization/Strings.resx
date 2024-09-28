@@ -76,6 +76,9 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Search for {0}: {1} hits. Showing page {2} of {3}.</value>
+  </data>
   <data name="SearchText" xml:space="preserve">
     <value>Search for</value>
   </data>

@@ -2,6 +2,7 @@
 using Avalonia;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 using Projektanker.Icons.Avalonia;
+using SmartLibrary.Avalonia.Services;
 
 namespace SmartLibrary.Avalonia;
 
@@ -18,7 +19,8 @@ internal class Program
     public static AppBuilder BuildAvaloniaApp()
     {
         IconProvider.Current
-                    .Register<MaterialDesignIconProvider>(); 
+                    .Register<MaterialDesignIconProvider>()
+                    .Register<CustomIconProvider>(); 
         
         return AppBuilder.Configure<App>()
                 .UsePlatformDetect()

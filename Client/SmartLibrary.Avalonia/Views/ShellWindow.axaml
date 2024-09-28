@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:SmartLibrary.Avalonia.Controls"
         xmlns:v="using:SmartLibrary.Avalonia.Views"
         xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
@@ -46,14 +47,16 @@
                     <Rectangle/>
                 </DockPanel>
             </SplitView.Pane>
-            <TransitioningContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
-                <TransitioningContentControl.PageTransition>
-                    <PageSlide Orientation="Horizontal" Duration="0:00:00.2" />
-                </TransitioningContentControl.PageTransition>
-                <TransitioningContentControl.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
-                </TransitioningContentControl.RenderTransform>
-            </TransitioningContentControl>
+            <Panel>
+                <TransitioningContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
+                    <TransitioningContentControl.PageTransition>
+                        <PageSlide Orientation="Horizontal" Duration="0:00:00.2" />
+                    </TransitioningContentControl.PageTransition>
+                    <TransitioningContentControl.RenderTransform>
+                        <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
+                    </TransitioningContentControl.RenderTransform>
+                </TransitioningContentControl>
+            </Panel>
         </SplitView>
     </DockPanel>
 </Window>

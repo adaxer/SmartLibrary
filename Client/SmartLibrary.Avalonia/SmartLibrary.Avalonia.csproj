@@ -10,6 +10,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);AUTOMATE</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Images\progress-ring.svg" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.3.0" />
@@ -32,10 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <AvaloniaResource Include="..\SmartLibrary.MAUI\Resources\Images\smart.png" Link="Images\smart.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="..\SmartLibrary.MAUI\Resources\Images\smart.png" Link="Images\smart.png" />
+    <EmbeddedResource Include="Images\progress-ring.svg" />
   </ItemGroup>
 </Project>

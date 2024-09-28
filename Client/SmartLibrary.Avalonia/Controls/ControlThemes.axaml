@@ -1,9 +1,10 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:i="https://github.com/projektanker/icons.avalonia"
                     xmlns:controls="using:SmartLibrary.Avalonia.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <StackPanel Spacing="10" Grid.IsSharedSizeScope="True">
-            <controls:LabelAndUnit Label="UserName" LabelMargin="8">
+        <Border Padding="10" Grid.IsSharedSizeScope="True" Width="600" Height="400">
+            <!--<controls:LabelAndUnit Label="UserName" LabelMargin="8">
                 <TextBox Text="Mein Name ist"/>
             </controls:LabelAndUnit>
             <controls:LabelAndUnit Label="Email" LabelMargin="8">
@@ -11,11 +12,23 @@
             </controls:LabelAndUnit>
             <controls:LabelAndUnit Label="Password" LabelMargin="8">
                 <TextBox PasswordChar="*" Text="password"/>
-            </controls:LabelAndUnit>
-        </StackPanel>
+            </controls:LabelAndUnit>-->
+            <controls:BusyIndicator IsBusy="True" />
+        </Border>
     </Design.PreviewWith>
 
     <!-- Add Resources Here -->
+
+    <ControlTheme x:Key="{x:Type controls:BusyIndicator}" TargetType="controls:BusyIndicator">
+        <Setter Property="Foreground" Value="{DynamicResource PaneBackgroundBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="controls:BusyIndicator">
+                <Panel Background="{DynamicResource BusyBackgroundBrush}" IsVisible="{TemplateBinding IsBusy}">
+                    <i:Icon Value="custom-progress-ring" Foreground="{TemplateBinding Foreground}" Animation="Spin" FontSize="120" />
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
 
     <ControlTheme x:Key="{x:Type controls:LabelAndUnit}" TargetType="controls:LabelAndUnit">
         <Setter Property="MinWidth" Value="200"/>

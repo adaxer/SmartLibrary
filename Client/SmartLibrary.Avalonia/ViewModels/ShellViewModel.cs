@@ -59,7 +59,9 @@ public partial class ShellViewModel : BaseViewModel
 
     private async Task<string> GetInternetStatusAsync()
     {
-        await Task.Delay(3000);
+        IsBusy = true;
+        await Task.Delay(8000);
+        IsBusy = false;
         return "Internet is available";
     }
 
