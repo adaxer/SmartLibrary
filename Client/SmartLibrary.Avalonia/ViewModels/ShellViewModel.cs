@@ -8,7 +8,6 @@ using SmartLibrary.Common.Extensions;
 using SmartLibrary.Core.Localization;
 using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Common.Messages;
-using Tmds.DBus.Protocol;
 
 namespace SmartLibrary.Avalonia.ViewModels;
 public partial class ShellViewModel : BaseViewModel
@@ -23,7 +22,10 @@ public partial class ShellViewModel : BaseViewModel
         _localizationService = localizationService;
         Title = _localizationService.Get("AppTitle");
         InitializeNavigation();
-        messenger.Register<NavigationMessage>(this, (r,m)=>Title = $"""{_localizationService.Get("AppTitle")} - {m.Target.Title}""");
+        messenger.Register<NavigationMessage>(this, (r, m) => Title = $"""{_localizationService.Get("AppTitle")} - {m.Target.Title}""");
+
+        messenger.Register<StatusMessage>(this, (r, m) => StatusText = m.Value);
+
     }
 
     [ObservableProperty]
@@ -31,6 +33,9 @@ public partial class ShellViewModel : BaseViewModel
 
     [ObservableProperty]
     bool _isExpanded = true;
+
+    [ObservableProperty]
+    string _statusText = string.Empty;
 
     [ObservableProperty]
     ObservableCollection<MenuEntry> _modules = new();
@@ -60,7 +65,7 @@ public partial class ShellViewModel : BaseViewModel
     private async Task<string> GetInternetStatusAsync()
     {
         IsBusy = true;
-        await Task.Delay(8000);
+        await Task.Delay(2000);
         IsBusy = false;
         return "Internet is available";
     }

@@ -57,5 +57,7 @@
             </Grid>
             <Button Margin="0 16" MinWidth="100" Content="{x:Static l:Strings.Share}" Command="{Binding SaveCommand}"  HorizontalAlignment="Left" IsVisible="{Binding CanShare}"/>
         </StackPanel>
+
+        <c:BusyIndicator IsBusy="{Binding IsBusy}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

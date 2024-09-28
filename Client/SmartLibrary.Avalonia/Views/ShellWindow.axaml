@@ -1,6 +1,8 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="using:SmartLibrary.Avalonia.Controls"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             
+        xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
         xmlns:v="using:SmartLibrary.Avalonia.Views"
         xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
@@ -30,8 +32,19 @@
                 <TextBlock Text="{Binding #_zoomSlider.Value, StringFormat={}{0:F2}}" VerticalAlignment="Center"/>
             </StackPanel>
 
+            <TextBlock Classes="subtitle status" Grid.Column="1" Text="{Binding StatusText}" >
+                <ia:Interaction.Behaviors>
+                    <b:FlashingBehavior FlashDuration="300" FlashCount="3"/>
+                </ia:Interaction.Behaviors>
+                <TextBlock.Transitions>
+                    <Transitions>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.2" Easing="SineEaseInOut"/>
+                    </Transitions>
+                </TextBlock.Transitions>
+            </TextBlock>
+            
             <StackPanel x:Name="_internetCheck" Orientation="Horizontal" Grid.Column="2" Margin="0 0 -300 0">
-                <TextBlock VerticalAlignment="Center" Text="Internet:" />
+                <TextBlock  VerticalAlignment="Center" Text="Internet:" />
                 <TextBlock Margin="12 0" Text="{Binding InternetStatus^, FallbackValue='Checking Internet status'}" VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -56,6 +69,8 @@
                         <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
                     </TransitioningContentControl.RenderTransform>
                 </TransitioningContentControl>
+
+                <c:BusyIndicator IsBusy="{Binding IsBusy}" />
             </Panel>
         </SplitView>
     </DockPanel>

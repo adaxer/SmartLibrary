@@ -1,8 +1,10 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:c="using:SmartLibrary.Avalonia.Controls"
              xmlns:l="using:SmartLibrary.Core.Localization"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             
+             xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
              xmlns:m="using:SmartLibrary.Core.Models"
              xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,7 +21,7 @@
         <ListBox ItemsSource="{Binding Books}"  Grid.Row="1" x:Name="_listBox" SelectedItem="{Binding CurrentBook, Mode=TwoWay}" Grid.IsSharedSizeScope="true">
             <i:Interaction.Behaviors>
                 <b:LoadMoreBehavior LoadMoreCommand="{Binding LoadMoreCommand}"/>
-                </i:Interaction.Behaviors>
+            </i:Interaction.Behaviors>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="m:Book">
                     <Grid>
@@ -43,6 +45,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <c:BusyIndicator IsBusy="{Binding IsBusy}" Grid.RowSpan="2" />
 
     </Grid>
 </UserControl>

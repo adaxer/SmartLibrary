@@ -1,4 +1,5 @@
 ﻿using SmartLibrary.Common.Extensions;
+using SmartLibrary.Common.Messages;
 
 namespace SmartLibrary.Common.ViewModels;
 
@@ -6,20 +7,21 @@ public partial class SearchViewModel : BaseViewModel
 {
     private const int PageSize = 5;
     private int _currentPage = 1;
-    
+
 
     readonly IBookService bookService;
     private readonly INavigationService navigationService;
-
+    private readonly IMessenger _messenger;
+    private readonly ILocalizationService _localizationService;
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SearchCommand))]
-    string _searchText=string.Empty;
+    string _searchText = string.Empty;
 
     [ObservableProperty]
     bool _isRefreshing;
 
     [ObservableProperty]
-    ObservableCollection<Book> _books=new();
+    ObservableCollection<Book> _books = new();
 
     [ObservableProperty]
     private Book? _currentBook;
@@ -27,17 +29,19 @@ public partial class SearchViewModel : BaseViewModel
     [ObservableProperty]
     private int _pageCount = 0;
 
-    public SearchViewModel(IBookService service, INavigationService navigationService)
+    public SearchViewModel(IBookService service, INavigationService navigationService, IMessenger messenger, ILocalizationService localizationService)
     {
         bookService = service;
         this.navigationService = navigationService;
-        Title = "Suche";
+        _messenger = messenger;
+        _localizationService = localizationService;
+        Title = _localizationService.Get("Search");
     }
 
-    [RelayCommand(CanExecute =nameof(CanSearch))]
+    [RelayCommand(CanExecute = nameof(CanSearch))]
     private Task SearchAsync() => LoadDataAsync();
 
-    bool CanSearch => SearchText is string text && text.Length >2;
+    bool CanSearch => SearchText is string text && text.Length > 2;
 
     [RelayCommand]
     private async Task GoToDetailsAsync(Book book)
@@ -49,7 +53,7 @@ public partial class SearchViewModel : BaseViewModel
     {
         if (newValue is Book book)
         {
-           GoToDetailsCommand.Execute(book);
+            GoToDetailsCommand.Execute(book);
         }
     }
 
@@ -78,29 +82,31 @@ public partial class SearchViewModel : BaseViewModel
         return Task.CompletedTask;
     }
 
-    private async Task LoadDataAsync(int page=1)
+private async Task LoadDataAsync(int page = 1)
+{
+    IsBusy = true;
+    try
     {
-        IsBusy = true;
-        try
+        var query = await bookService.BookQueryAsync(SearchText, PageSize, page);
+        PageCount = (query.Count / PageSize) + ((query.Count % PageSize == 0) ? 0 : 1);
+        if (page == 1)
         {
-            var query = await bookService.BookQueryAsync(SearchText, PageSize,page);
-            PageCount = (query.Count / PageSize) + ((query.Count % PageSize == 0) ? 0 : 1);
-            if(page == 1)
-            {
             Books = new ObservableCollection<Book>(query.Books);
-            }
-            else
-            {
-                Books.AddRange(query.Books);
-            }
         }
-        catch (Exception ex)
+        else
         {
-            Trace.TraceError($"{ex}");
+            Books.AddRange(query.Books);
         }
-        finally
-        {
-            IsBusy = false;
-        }
+        var message = string.Format(_localizationService.Get("SearchResult"), SearchText, query.Count, page, PageCount);
+        _messenger.Send(new StatusMessage(message));
     }
+    catch (Exception ex)
+    {
+        Trace.TraceError($"{ex}");
+    }
+    finally
+    {
+        IsBusy = false;
+    }
+}
 }
