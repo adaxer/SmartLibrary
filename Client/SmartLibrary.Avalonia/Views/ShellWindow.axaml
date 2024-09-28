@@ -46,11 +46,14 @@
                     <Rectangle/>
                 </DockPanel>
             </SplitView.Pane>
-            <ContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
-                <ContentControl.RenderTransform>
+            <TransitioningContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
+                <TransitioningContentControl.PageTransition>
+                    <PageSlide Orientation="Horizontal" Duration="0:00:00.2" />
+                </TransitioningContentControl.PageTransition>
+                <TransitioningContentControl.RenderTransform>
                     <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
-                </ContentControl.RenderTransform>
-            </ContentControl>
+                </TransitioningContentControl.RenderTransform>
+            </TransitioningContentControl>
         </SplitView>
     </DockPanel>
 </Window>
