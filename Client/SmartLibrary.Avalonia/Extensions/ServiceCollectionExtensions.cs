@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
 using NSubstitute;
 using SmartLibrary.Avalonia;
 using SmartLibrary.Avalonia.Services;
@@ -51,6 +52,9 @@ public static class ServiceCollectionExtensions
         // Http Clients
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
+
+        // From ext. Libraries
+        services.AddSingleton<IMessenger, WeakReferenceMessenger>();
 
         // AUTOMATE
 #if AUTOMATE

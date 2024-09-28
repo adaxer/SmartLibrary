@@ -6,6 +6,9 @@ using SmartLibrary.Common.Interfaces;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Common.Extensions;
 using SmartLibrary.Core.Localization;
+using CommunityToolkit.Mvvm.Messaging;
+using SmartLibrary.Common.Messages;
+using Tmds.DBus.Protocol;
 
 namespace SmartLibrary.Avalonia.ViewModels;
 public partial class ShellViewModel : BaseViewModel
@@ -13,13 +16,14 @@ public partial class ShellViewModel : BaseViewModel
     private readonly INavigationService _navigationService;
     private readonly ILocalizationService _localizationService;
 
-    public ShellViewModel(MainViewModel main, INavigationService navigationService, ILocalizationService localizationService)
+    public ShellViewModel(MainViewModel main, INavigationService navigationService, ILocalizationService localizationService, IMessenger messenger)
     {
         CurrentModule = main;
         _navigationService = navigationService;
         _localizationService = localizationService;
         Title = _localizationService.Get("AppTitle");
         InitializeNavigation();
+        messenger.Register<NavigationMessage>(this, (r,m)=>Title = $"""{_localizationService.Get("AppTitle")} - {m.Target.Title}""");
     }
 
     [ObservableProperty]
