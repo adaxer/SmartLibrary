@@ -54,7 +54,7 @@ public class CustomIconProvider : IIconProvider
 
     private static bool TryGetIconResourceStream(string value, out Stream stream)
     {
-        stream = default;
+        stream = default!;
 
         if (value.Length <= _prefix.Length + 1)
         {
@@ -63,7 +63,7 @@ public class CustomIconProvider : IIconProvider
 
         var withoutPrefix = value.Substring(_prefix.Length + 1);
         var resourceName = string.Format(_resourceNameTemplate, withoutPrefix);
-        stream = _assembly.GetManifestResourceStream(resourceName);
+        stream = _assembly.GetManifestResourceStream(resourceName)!;
 
         return stream != default;
     }

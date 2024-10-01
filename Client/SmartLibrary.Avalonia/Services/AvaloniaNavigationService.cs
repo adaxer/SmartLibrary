@@ -41,7 +41,7 @@ public class AvaloniaNavigationService : INavigationService
     public async Task<(bool result, T dialog)> ShowDialogAsync<T>(params (string key, object value)[] data) where T : BaseViewModel
     {
         var parameters = data.ToDictionary(kv => kv.key, kv => kv.value);
-        var target = _serviceProvider.GetService<T>();
+        var target = _serviceProvider.GetService<T>()!;
         _messenger.Send(new NavigationMessage(target, false));
         var result = await _dialogService.ShowDialogAsync<T>(target!, parameters);
         return result;

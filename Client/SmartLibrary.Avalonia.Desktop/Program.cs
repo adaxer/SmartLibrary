@@ -1,12 +1,12 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 using Projektanker.Icons.Avalonia;
 using SmartLibrary.Avalonia.Services;
+using System;
 
-namespace SmartLibrary.Avalonia;
+namespace SmartLibrary.Avalonia.Desktop;
 
-internal class Program
+internal sealed class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -20,8 +20,8 @@ internal class Program
     {
         IconProvider.Current
                     .Register<MaterialDesignIconProvider>()
-                    .Register<CustomIconProvider>(); 
-        
+                    .Register<CustomIconProvider>();
+
         return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
