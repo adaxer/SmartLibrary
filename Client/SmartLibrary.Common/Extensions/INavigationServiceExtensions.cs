@@ -35,7 +35,7 @@ public static class INavigationServiceExtensions
         }
         catch (Exception ex)
         {
-            Trace.TraceError($"Error showing Dialog: {ex}");
+            Trace.TraceError($"Error showing Page: {ex}");
         }
     }
 }

@@ -38,16 +38,15 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddSingleton<INavigationService, AvaloniaNavigationService>();
         services.AddSingleton<IThemeService, AvaloniaThemeService>();
+
+        services.AddSingleton<ILocationService, DummyLocationService>();
+        services.AddSingleton<IBookStorage, DummyBookStorage>();
+        services.AddSingleton<IBookShareClient, DummyBookShareClient>();
+
         var storageMock = Substitute.For<ISecureStorage>();
         storageMock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
             .Returns(callInfo => Task.FromResult(callInfo.Arg<UserInfo>()));
         services.AddSingleton<ISecureStorage>(storageMock);
-        var locationMock = Substitute.For<ILocationService>();
-        services.AddSingleton<ILocationService>(locationMock);
-        var bookStorageMock = Substitute.For<IBookStorage>();
-        services.AddSingleton<IBookStorage>(bookStorageMock);
-        var shareMock = Substitute.For<IBookShareClient>();
-        services.AddSingleton<IBookShareClient>(shareMock);
 
         // Http Clients
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
