@@ -39,5 +39,30 @@ public class DummyBookShareClient : IBookShareClient
     }
 }
 
+public class DummyStorage : ISecureStorage
+{
+    private readonly Dictionary<string, object> _storage = new();
+
+    public Task SetAsync<T>(string key, T value)
+    {
+        _storage[key] = value!;
+        return Task.CompletedTask;
+    }
+
+    public Task<T> GetAsync<T>(string key, T fallback = default!)
+    {
+        if (_storage.TryGetValue(key, out var value))
+        {
+            return Task.FromResult((T)value);
+        }
+        return Task.FromResult(fallback);
+    }
+
+    public void Remove(string key)
+    {
+        _storage.Remove(key);
+    }
+}
+
 
 

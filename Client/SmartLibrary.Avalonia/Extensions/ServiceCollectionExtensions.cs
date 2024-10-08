@@ -42,11 +42,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ILocationService, DummyLocationService>();
         services.AddSingleton<IBookStorage, DummyBookStorage>();
         services.AddSingleton<IBookShareClient, DummyBookShareClient>();
-
-        var storageMock = Substitute.For<ISecureStorage>();
-        storageMock.GetAsync<UserInfo>(Arg.Any<string>(), Arg.Any<UserInfo>())
-            .Returns(callInfo => Task.FromResult(callInfo.Arg<UserInfo>()));
-        services.AddSingleton<ISecureStorage>(storageMock);
+        services.AddSingleton<ISecureStorage, DummyStorage>();
 
         // Http Clients
         services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
