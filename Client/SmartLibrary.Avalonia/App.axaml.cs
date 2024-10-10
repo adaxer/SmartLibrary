@@ -48,7 +48,7 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
 
-        if(_serviceProvider.GetRequiredService<IAutomate>() is IAutomate auto)
+        if(_serviceProvider.GetService<IAutomate>() is IAutomate auto)
         {
             auto.StartAsync();
         }

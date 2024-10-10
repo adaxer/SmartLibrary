@@ -2,6 +2,10 @@
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
+using Projektanker.Icons.Avalonia.MaterialDesign;
+using Projektanker.Icons.Avalonia;
+using SmartLibrary.Avalonia.Services;
+using Android.OS;
 
 namespace SmartLibrary.Avalonia.Android;
 [Activity(
@@ -14,6 +18,10 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        IconProvider.Current
+                    .Register<MaterialDesignIconProvider>()
+                    .Register<CustomIconProvider>();
+
         return base.CustomizeAppBuilder(builder)
             .WithInterFont();
     }

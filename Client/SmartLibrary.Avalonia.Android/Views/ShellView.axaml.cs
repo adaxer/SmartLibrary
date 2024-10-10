@@ -8,10 +8,10 @@ using Avalonia.Styling;
 using System.Threading.Tasks;
 using SmartLibrary.Avalonia.Interfaces;
 
-namespace SmartLibrary.Avalonia.Desktop.Views;
-public partial class ShellWindow : Window, IShellView
+namespace SmartLibrary.Avalonia.Android.Views;
+public partial class ShellView : UserControl, IShellView
 {
-    public ShellWindow(IShellViewModel viewModel)
+    public ShellView(IShellViewModel viewModel)
     {
         InitializeComponent();
         DataContext = viewModel;

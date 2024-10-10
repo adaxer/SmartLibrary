@@ -22,6 +22,5 @@ public class DesktopRegistrar : IRegisterServices
 #if AUTOMATE 
         services.AddSingleton<IAutomate, AutomateDesktop>();
 #endif
-
     }
 }

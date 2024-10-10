@@ -25,4 +25,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SmartLibrary.Avalonia\SmartLibrary.Avalonia.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ShellView.axaml.cs">
+      <DependentUpon>ShellView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

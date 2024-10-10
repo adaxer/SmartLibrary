@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:SmartLibrary.Avalonia.Controls"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             
+        xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
+        xmlns:v="using:SmartLibrary.Avalonia.Views"
+        xmlns:vm="clr-namespace:SmartLibrary.Avalonia.ViewModels;assembly=SmartLibrary.Avalonia"
+        xmlns:i="https://github.com/projektanker/icons.avalonia"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SmartLibrary.Avalonia.Android.Views.ShellView"
+        x:DataType="vm:ShellViewModel" Background="{DynamicResource ShellBackgroundBrush}">
+
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="{x:Type vm:MenuEntry}">
+            <Button Foreground="White" Margin="8 4" Command="{Binding #_itemsHost.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
+                <StackPanel Orientation="Horizontal">
+                    <i:Icon Value="{Binding Icon}"/>
+                    <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding $parent.((vm:ShellViewModel)DataContext).IsExpanded}" Margin="8 0"/>
+                </StackPanel>
+            </Button>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+
+    <DockPanel>
+        <Grid ColumnDefinitions="Auto, *, Auto" DockPanel.Dock="Bottom" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" Text="Zoom:" />
+                <NumericUpDown Minimum="0.5" Maximum="2" Value="1" Increment="0.1" x:Name="_zoomSlider" Margin="8 0" />
+            </StackPanel>
+
+            <TextBlock Classes="subtitle status" Grid.Column="1" Text="{Binding StatusText}" >
+                <ia:Interaction.Behaviors>
+                    <b:FlashingBehavior FlashDuration="300" FlashCount="3"/>
+                </ia:Interaction.Behaviors>
+                <TextBlock.Transitions>
+                    <Transitions>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.2" Easing="SineEaseInOut"/>
+                    </Transitions>
+                </TextBlock.Transitions>
+            </TextBlock>
+            
+            <StackPanel x:Name="_internetCheck" Orientation="Horizontal" Grid.Column="2" Margin="0 0 -300 0">
+                <TextBlock  VerticalAlignment="Center" Text="Internet:" />
+                <TextBlock Margin="12 0" Text="{Binding InternetStatus^, FallbackValue='Checking Internet status'}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+        </Grid>
+
+        <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="{DynamicResource PaneBackgroundBrush}" OpenPaneLength="240" DisplayMode="CompactOverlay">
+            <SplitView.Pane>
+                <DockPanel x:Name="_itemsHost">
+                    <Button Foreground="White"  Margin="8" DockPanel.Dock="Top" i:Attached.Icon="mdi-menu" Command="{Binding ToggleExpandedCommand}"/>
+                    <Separator DockPanel.Dock="Top" Margin="8"/>
+                    <ItemsControl ItemsSource="{Binding Modules}" DockPanel.Dock="Top"/>
+                    <ItemsControl ItemsSource="{Binding Dialogs}" DockPanel.Dock="Bottom" />
+                    <Rectangle/>
+                </DockPanel>
+            </SplitView.Pane>
+            <Panel>
+                <TransitioningContentControl RenderTransformOrigin="0,0" Content="{Binding CurrentModule}">
+                    <TransitioningContentControl.PageTransition>
+                        <PageSlide Orientation="Horizontal" Duration="0:00:00.2" />
+                    </TransitioningContentControl.PageTransition>
+                    <TransitioningContentControl.RenderTransform>
+                        <ScaleTransform ScaleX="{Binding #_zoomSlider.Value}" ScaleY="{Binding #_zoomSlider.Value}" />
+                    </TransitioningContentControl.RenderTransform>
+                </TransitioningContentControl>
+
+                <c:BusyIndicator IsBusy="{Binding IsBusy}" />
+            </Panel>
+        </SplitView>
+    </DockPanel>
+</UserControl>

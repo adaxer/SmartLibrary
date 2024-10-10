@@ -9,6 +9,7 @@ using SmartLibrary.Core.Localization;
 using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Common.Messages;
 using SmartLibrary.Avalonia.Interfaces;
+using System;
 
 namespace SmartLibrary.Avalonia.ViewModels;
 public partial class ShellViewModel : BaseViewModel, IShellViewModel, IRecipient<NavigationMessage>, IRecipient<StatusMessage>
@@ -31,7 +32,7 @@ public partial class ShellViewModel : BaseViewModel, IShellViewModel, IRecipient
     BaseViewModel? _currentModule;
 
     [ObservableProperty]
-    bool _isExpanded = true;
+    bool _isExpanded = !(OperatingSystem.IsIOS() || OperatingSystem.IsAndroid());
 
     [ObservableProperty]
     string _statusText = string.Empty;
