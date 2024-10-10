@@ -29,8 +29,8 @@ xmlns:vm="using:SmartLibrary.Common.ViewModels"
     </Application.Resources>
 
     <Application.DataTemplates>
-        <DataTemplate DataType="{x:Type vm:MainViewModel}">
-            <v:MainView/>
+        <DataTemplate DataType="{x:Type vm:WelcomeViewModel}">
+            <v:WelcomeView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LoginViewModel}">
             <v:LoginView/>

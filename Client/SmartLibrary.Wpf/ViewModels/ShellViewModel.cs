@@ -15,7 +15,7 @@ public partial class ShellViewModel : BaseViewModel
     {
         Modules = new ObservableCollection<IModuleViewModel>
         {
-            serviceProvider.GetService<ModuleViewModel<MainViewModel>>(),
+            serviceProvider.GetService<ModuleViewModel<WelcomeViewModel>>(),
             serviceProvider.GetService<ModuleViewModel<SearchViewModel>>(),
             serviceProvider.GetService<ModuleViewModel<DetailsViewModel>>(),
             serviceProvider.GetService<ModuleViewModel<NewsViewModel>>(),

@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
-using NSubstitute;
-using SmartLibrary.Avalonia;
-using SmartLibrary.Avalonia.Services;
+using Microsoft.Extensions.DependencyInjection;
+using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Avalonia.ViewModels;
 using SmartLibrary.Common.Interfaces;
-using SmartLibrary.Common.Models;
 using SmartLibrary.Common.Services;
 using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Core.Interfaces;
 using SmartLibrary.Core.Localization;
 using SmartLibrary.Core.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
-public static class ServiceCollectionExtensions
+namespace SmartLibrary.Avalonia.Services;
+public class ServiceRegistrar : IRegisterServices
 {
-    public static void AddDependencies(this IServiceCollection services)
+    public void Register(IServiceCollection services)
     {
         // Platform ViewModels 
         services.AddSingleton<ShellViewModel>();
         services.AddTransient<SettingsViewModel>();
 
         // Common ViewModels
-        services.AddTransient<MainViewModel>();
+        services.AddTransient<WelcomeViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddSingleton<SearchViewModel>();
@@ -35,8 +32,6 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ILocalizationService, ResXLocalizationService>();
 
         // Platform Services
-        services.AddSingleton<IDialogService, AvaloniaDialogService>();
-        services.AddSingleton<INavigationService, AvaloniaNavigationService>();
         services.AddSingleton<IThemeService, AvaloniaThemeService>();
 
         services.AddSingleton<ILocationService, DummyLocationService>();
@@ -49,7 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
 
         // From ext. Libraries
-        services.AddSingleton<IMessenger, WeakReferenceMessenger>();
+        services.AddSingleton<IPubSubService, AvaloniaPubSubService>();
 
         // AUTOMATE
 #if AUTOMATE

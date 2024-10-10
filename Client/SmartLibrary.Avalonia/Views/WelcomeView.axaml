@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SmartLibrary.Avalonia.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:Class="SmartLibrary.Avalonia.Views.WelcomeView"
+             x:DataType="vm:WelcomeViewModel">
     
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Classes="h1" HorizontalAlignment="Center" Text="{x:Static l:Strings.Main}" />
+        <TextBlock Classes="h1" HorizontalAlignment="Center" Text="{x:Static l:Strings.Welcome}" />
         <Image Source="/Images/smart.png" Grid.Row="1" MaxWidth="400" Stretch="Uniform" />
     </Grid>
 </UserControl>

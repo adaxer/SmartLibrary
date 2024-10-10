@@ -10,22 +10,20 @@ using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Common.Messages;
 
 namespace SmartLibrary.Avalonia.ViewModels;
-public partial class ShellViewModel : BaseViewModel
+public partial class ShellViewModel : BaseViewModel, IRecipient<NavigationMessage>, IRecipient<StatusMessage>
 {
     private readonly INavigationService _navigationService;
     private readonly ILocalizationService _localizationService;
 
-    public ShellViewModel(MainViewModel main, INavigationService navigationService, ILocalizationService localizationService, IMessenger messenger)
+    public ShellViewModel(WelcomeViewModel welcome, INavigationService navigationService, ILocalizationService localizationService, IPubSubService pubSub)
     {
-        CurrentModule = main;
+        CurrentModule = welcome;
         _navigationService = navigationService;
         _localizationService = localizationService;
         Title = _localizationService.Get("AppTitle");
         InitializeNavigation();
-        messenger.Register<NavigationMessage>(this, (r, m) => Title = $"""{_localizationService.Get("AppTitle")} - {m.Target.Title}""");
-
-        messenger.Register<StatusMessage>(this, (r, m) => StatusText = m.Value);
-
+        pubSub.Subscribe<NavigationMessage>(this);
+        pubSub.Subscribe<StatusMessage>(this);
     }
 
     [ObservableProperty]
@@ -74,10 +72,14 @@ public partial class ShellViewModel : BaseViewModel
 
     private void InitializeNavigation()
     {
-        Modules.Add(new MenuEntry(_localizationService.Get("Main"), typeof(MainViewModel), "human-greeting-variant"));
+        Modules.Add(new MenuEntry(_localizationService.Get("Welcome"), typeof(WelcomeViewModel), "human-greeting-variant"));
         Modules.Add(new MenuEntry(_localizationService.Get("Search"), typeof(SearchViewModel), "magnify"));
         Modules.Add(new MenuEntry(_localizationService.Get("Settings"), typeof(SettingsViewModel), "cog-outline"));
         Dialogs.Add(new MenuEntry(_localizationService.Get("About"), typeof(AboutViewModel), "information-outline", true));
         Dialogs.Add(new MenuEntry(_localizationService.Get("LoginOrRegister"), typeof(LoginViewModel), "login", true));
     }
+
+    public void Receive(NavigationMessage message) => Title = $"""{_localizationService.Get("AppTitle")} - {message.Target.Title}""";
+
+    public void Receive(StatusMessage message) => StatusText = message.Value;
 }

@@ -5,12 +5,12 @@ namespace SmartLibrary.Common.ViewModels;
 
 // Todo: Logout, Refresh token
 
-public partial class MainViewModel : BaseViewModel
+public partial class WelcomeViewModel : BaseViewModel
 {
     private readonly IUserClient _userService;
     private readonly INavigationService _navigationService;
 
-    public MainViewModel(IUserClient userService, INavigationService navigationService)
+    public WelcomeViewModel(IUserClient userService, INavigationService navigationService)
     {
         _userService = userService;
         _navigationService = navigationService;
@@ -38,7 +38,7 @@ public partial class MainViewModel : BaseViewModel
     {
         IsLoggedIn = await _userService.GetIsLoggedInAsync();
         Title = IsLoggedIn
-            ? $"{Strings.Main} {_userService.UserName}"
-            : $"{Strings.Main}";
+            ? $"{Strings.Welcome} {_userService.UserName}"
+            : $"{Strings.Welcome}";
     }
 }

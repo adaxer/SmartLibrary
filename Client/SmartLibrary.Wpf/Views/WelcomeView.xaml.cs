@@ -2,11 +2,11 @@
 
 namespace SmartLibrary.Wpf.Views;
 /// <summary>
-/// Interaction logic for MainView.xaml
+/// Interaction logic for WelcomeView.xaml
 /// </summary>
-public partial class MainView : UserControl
+public partial class WelcomeView : UserControl
 {
-    public MainView()
+    public WelcomeView()
     {
         InitializeComponent();
     }

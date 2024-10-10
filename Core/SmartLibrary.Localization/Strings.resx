@@ -52,9 +52,6 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
-  <data name="Main" xml:space="preserve">
-    <value>Welcome</value>
-  </data>
   <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
@@ -111,5 +108,8 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
   </data>
 </root>

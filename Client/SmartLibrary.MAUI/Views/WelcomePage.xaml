@@ -5,8 +5,8 @@
 			 xmlns:vm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
              xmlns:c="clr-namespace:SmartLibrary.MAUI.Converters"
              xmlns:l="clr-namespace:SmartLibrary.Core.Localization;assembly=SmartLibrary.Localization"
-			 x:Class="SmartLibrary.MAUI.Views.MainPage"
-			 x:DataType="vm:MainViewModel" Title="{Binding Title}">
+			 x:Class="SmartLibrary.MAUI.Views.WelcomePage"
+			 x:DataType="vm:WelcomeViewModel" Title="{Binding Title}">
 
     <StackLayout >
         <Button WidthRequest="200" Text="{x:Static l:Strings.LoginOrRegister}" Command="{Binding LoginCommand}" IsVisible="{Binding IsLoggedIn, Converter={StaticResource NotConverter}}"/>

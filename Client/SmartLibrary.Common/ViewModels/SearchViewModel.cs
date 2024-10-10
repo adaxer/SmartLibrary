@@ -11,7 +11,7 @@ public partial class SearchViewModel : BaseViewModel
 
     readonly IBookService bookService;
     private readonly INavigationService navigationService;
-    private readonly IMessenger _messenger;
+    private readonly IPubSubService _pubsub;
     private readonly ILocalizationService _localizationService;
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SearchCommand))]
@@ -29,11 +29,11 @@ public partial class SearchViewModel : BaseViewModel
     [ObservableProperty]
     private int _pageCount = 0;
 
-    public SearchViewModel(IBookService service, INavigationService navigationService, IMessenger messenger, ILocalizationService localizationService)
+    public SearchViewModel(IBookService service, INavigationService navigationService, IPubSubService pubSub, ILocalizationService localizationService)
     {
         bookService = service;
         this.navigationService = navigationService;
-        _messenger = messenger;
+        _pubsub = pubSub;
         _localizationService = localizationService;
         Title = _localizationService.Get("Search");
     }
@@ -98,7 +98,7 @@ private async Task LoadDataAsync(int page = 1)
             Books.AddRange(query.Books);
         }
         var message = string.Format(_localizationService.Get("SearchResult"), SearchText, query.Count, page, PageCount);
-        _messenger.Send(new StatusMessage(message));
+        _pubsub.Publish(new StatusMessage(message));
     }
     catch (Exception ex)
     {

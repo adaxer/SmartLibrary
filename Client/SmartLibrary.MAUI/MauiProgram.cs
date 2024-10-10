@@ -38,8 +38,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IBookShareClient, BookShareClient>();
         builder.Services.AddSingleton<IPubSubService, PubSubService>();
 
-        builder.Services.AddSingleton<MainViewModel>();
-        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<WelcomeViewModel>();
+        builder.Services.AddSingleton<WelcomePage>();
 
         builder.Services.AddTransient<DetailsViewModel>();
         builder.Services.AddTransient<DetailsPage>();

@@ -72,7 +72,7 @@
     <ProjectReference Include="..\..\Data\SmartLibrary.Data\SmartLibrary.Data.csproj" />
     <ProjectReference Include="..\..\Core\SmartLibrary.Localization\SmartLibrary.Localization.csproj" />
   </ItemGroup>
-  
+
 	<ItemGroup>
 	  <MauiXaml Update="Views\DetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -80,7 +80,7 @@
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MainPage.xaml">
+	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NewsPage.xaml">

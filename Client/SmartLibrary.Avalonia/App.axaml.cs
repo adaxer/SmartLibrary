@@ -1,8 +1,15 @@
-﻿using Avalonia;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Avalonia.ViewModels;
 using SmartLibrary.Avalonia.Views;
 using SmartLibrary.Common.ViewModels;
@@ -10,6 +17,8 @@ using SmartLibrary.Common.ViewModels;
 namespace SmartLibrary.Avalonia;
 public partial class App : Application
 {
+    private ServiceProvider _serviceProvider = default!;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -21,32 +30,55 @@ public partial class App : Application
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 
-        // Register all the services needed for the application to run
-        var collection = new ServiceCollection();
-        collection.AddDependencies();
-
-        // Creates a ServiceProvider containing services from the provided IServiceCollection
-        var services = collection.BuildServiceProvider();
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new ShellWindow
             {
-                DataContext = services.GetRequiredService<ShellViewModel>()
+                DataContext = _serviceProvider.GetRequiredService<ShellViewModel>()
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            singleViewPlatform.MainView = new WelcomeView
             {
-                DataContext = services.GetRequiredService<MainViewModel>()
+                DataContext = _serviceProvider.GetRequiredService<WelcomeViewModel>()
             };
         }
 
         base.OnFrameworkInitializationCompleted();
 
 #if AUTOMATE
-        services.GetService<Automate>()!.StartAsync();
+        _serviceProvider.GetRequiredService<Automate>().StartAsync();
 #endif
+    }
+
+    public override void RegisterServices()
+    {
+        var services = new ServiceCollection();
+
+        List<IRegisterServices> registrars = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Where(a => (a.FullName ?? string.Empty).Contains(this.GetType().Namespace ?? string.Empty))
+            .SelectMany(a => a.GetTypes())
+            .Where(t => typeof(IRegisterServices).IsAssignableFrom(t) && t.IsClass)
+            .Select(Activator.CreateInstance)
+            .OfType<IRegisterServices>()
+            .ToList();
+
+        foreach (var registrar in registrars)
+        {
+            try
+            {
+                registrar.Register(services);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError($"Could not register Services on {registrar}: {ex}");
+            }
+        }
+
+        base.RegisterServices();
+
+        _serviceProvider = services.BuildServiceProvider();
     }
 }

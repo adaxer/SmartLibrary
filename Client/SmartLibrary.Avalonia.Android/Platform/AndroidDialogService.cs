@@ -6,9 +6,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using SmartLibrary.Common.Interfaces;
 using SmartLibrary.Common.ViewModels;
 
-namespace SmartLibrary.Avalonia.Services;
+namespace SmartLibrary.Avalonia.Android.Platform;
 
-public class AvaloniaDialogService : IDialogService
+public class AndroidDialogService : IDialogService
 {
     public async Task<(bool result, T content)> ShowDialogAsync<T>(T content, IDictionary<string, object> data) where T : BaseViewModel
     {

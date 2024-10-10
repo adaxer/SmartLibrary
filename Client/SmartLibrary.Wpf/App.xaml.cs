@@ -59,8 +59,8 @@ public partial class App : Application
         services.AddTransient(typeof(ModuleViewModel<>));
         services.AddSingleton<ShellViewModel>();
         services.AddSingleton<ShellWindow>();
-        services.AddSingleton<MainViewModel>();
-        services.AddSingleton<MainView>();
+        services.AddSingleton<WelcomeViewModel>();
+        services.AddSingleton<WelcomeView>();
 
         services.AddSingleton<SearchViewModel>();
         services.AddSingleton<SearchView>();
