@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Avalonia.ViewModels;
 using SmartLibrary.Common.ViewModels;
 
 namespace SmartLibrary.Avalonia;
 
-internal class Automate
+internal class AutomateDesktop : IAutomate
 {
     private readonly ShellViewModel _shell;
 
-    public Automate(ShellViewModel shell)
+    public AutomateDesktop(IShellViewModel shell)
     {
-        _shell = shell;
+        _shell = (shell as ShellViewModel)!;
     }
-    internal async void StartAsync()
+    public async void StartAsync()
     {
         await StartAutomationAsync();
     }

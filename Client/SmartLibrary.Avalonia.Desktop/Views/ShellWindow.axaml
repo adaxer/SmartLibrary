@@ -4,18 +4,18 @@
         xmlns:ia="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             
         xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
         xmlns:v="using:SmartLibrary.Avalonia.Views"
-        xmlns:vm="using:SmartLibrary.Avalonia.ViewModels"
+        xmlns:vm="clr-namespace:SmartLibrary.Avalonia.ViewModels;assembly=SmartLibrary.Avalonia"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="SmartLibrary.Avalonia.Views.ShellWindow"
+        x:Class="SmartLibrary.Avalonia.Desktop.Views.ShellWindow"
         x:DataType="vm:ShellViewModel" TransparencyLevelHint="AcrylicBlur" Background="{DynamicResource ShellBackgroundBrush}"
-                Title="{Binding Title}" Icon="/Assets/avalonia-logo.ico">
+        Title="{Binding Title}" Icon="/Assets/avalonia-logo.ico">
 
     <Window.DataTemplates>
         <DataTemplate DataType="{x:Type vm:MenuEntry}">
-            <Button Foreground="White" Margin="8 4" Command="{Binding $parent.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
+            <Button Foreground="White" Margin="8 4" Command="{Binding #_itemsHost.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
                 <StackPanel Orientation="Horizontal">
                     <i:Icon Value="{Binding Icon}"/>
                     <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding $parent.((vm:ShellViewModel)DataContext).IsExpanded}" Margin="8 0"/>
@@ -52,7 +52,7 @@
 
         <SplitView IsPaneOpen="{Binding IsExpanded, Mode=TwoWay}" PaneBackground="{DynamicResource PaneBackgroundBrush}" OpenPaneLength="240" DisplayMode="CompactInline">
             <SplitView.Pane>
-                <DockPanel>
+                <DockPanel x:Name="_itemsHost">
                     <Button Foreground="White"  Margin="8" DockPanel.Dock="Top" i:Attached.Icon="mdi-menu" Command="{Binding ToggleExpandedCommand}"/>
                     <Separator DockPanel.Dock="Top" Margin="8"/>
                     <ItemsControl ItemsSource="{Binding Modules}" DockPanel.Dock="Top"/>

@@ -6,6 +6,8 @@ using SmartLibrary.Common.Interfaces;
 namespace SmartLibrary.Avalonia.Android;
 public class AndroidRegistrar : IRegisterServices
 {
+    public int ExecutionOrder => 10;
+
     void IRegisterServices.Register(IServiceCollection services)
     {
         services.AddSingleton<IDialogService, AndroidDialogService>();

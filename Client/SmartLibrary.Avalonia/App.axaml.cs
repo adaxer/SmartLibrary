@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Interfaces;
-using SmartLibrary.Avalonia.ViewModels;
-using SmartLibrary.Avalonia.Views;
-using SmartLibrary.Common.ViewModels;
 
 namespace SmartLibrary.Avalonia;
 public partial class App : Application
@@ -30,26 +26,32 @@ public partial class App : Application
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        // Set the proper MainView/Window depending on the Application lifetime
+        try
         {
-            desktop.MainWindow = new ShellWindow
+            var shell = _serviceProvider.GetRequiredService<IShellViewModel>();
+            var view = _serviceProvider.GetRequiredService<IShellView>();
+
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && view is Window window)
             {
-                DataContext = _serviceProvider.GetRequiredService<ShellViewModel>()
-            };
+                desktop.MainWindow = window;
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform && view is Control control)
+            {
+                singleViewPlatform.MainView = control;
+            }
         }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        catch (Exception ex)
         {
-            singleViewPlatform.MainView = new WelcomeView
-            {
-                DataContext = _serviceProvider.GetRequiredService<WelcomeViewModel>()
-            };
+            Trace.TraceError($"Could not set main view. Make sure to register an IShellViewModel and an IShellView being a Window in desktop mode resp. a Control in mobile mode: {ex}");
         }
 
         base.OnFrameworkInitializationCompleted();
 
-#if AUTOMATE
-        _serviceProvider.GetRequiredService<Automate>().StartAsync();
-#endif
+        if(_serviceProvider.GetRequiredService<IAutomate>() is IAutomate auto)
+        {
+            auto.StartAsync();
+        }
     }
 
     public override void RegisterServices()
@@ -63,6 +65,7 @@ public partial class App : Application
             .Where(t => typeof(IRegisterServices).IsAssignableFrom(t) && t.IsClass)
             .Select(Activator.CreateInstance)
             .OfType<IRegisterServices>()
+            .OrderBy(r => r.ExecutionOrder)
             .ToList();
 
         foreach (var registrar in registrars)

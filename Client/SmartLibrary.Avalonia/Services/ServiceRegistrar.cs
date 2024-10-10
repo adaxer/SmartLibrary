@@ -1,5 +1,4 @@
 ﻿using System;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Avalonia.ViewModels;
@@ -13,10 +12,12 @@ using SmartLibrary.Core.Services;
 namespace SmartLibrary.Avalonia.Services;
 public class ServiceRegistrar : IRegisterServices
 {
+    public int ExecutionOrder => 5;
+
     public void Register(IServiceCollection services)
     {
         // Platform ViewModels 
-        services.AddSingleton<ShellViewModel>();
+        services.AddSingleton<IShellViewModel, ShellViewModel>();
         services.AddTransient<SettingsViewModel>();
 
         // Common ViewModels
@@ -45,10 +46,5 @@ public class ServiceRegistrar : IRegisterServices
 
         // From ext. Libraries
         services.AddSingleton<IPubSubService, AvaloniaPubSubService>();
-
-        // AUTOMATE
-#if AUTOMATE
-        services.AddSingleton<Automate>();
-#endif
     }
 }

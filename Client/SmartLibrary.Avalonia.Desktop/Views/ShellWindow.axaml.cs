@@ -7,13 +7,15 @@ using Avalonia.Interactivity;
 using Avalonia.Rendering.Composition.Animations;
 using Avalonia.Styling;
 using System.Threading.Tasks;
+using SmartLibrary.Avalonia.Interfaces;
 
-namespace SmartLibrary.Avalonia.Views;
-public partial class ShellWindow : Window
+namespace SmartLibrary.Avalonia.Desktop.Views;
+public partial class ShellWindow : Window, IShellView
 {
-    public ShellWindow()
+    public ShellWindow(IShellViewModel viewModel)
     {
         InitializeComponent();
+        DataContext = viewModel;
     }
 
     protected override async void OnLoaded(RoutedEventArgs e)
@@ -28,19 +30,19 @@ public partial class ShellWindow : Window
             {
                 new KeyFrame
                 {
-                    Setters = { 
-                        new Setter(StackPanel.MarginProperty, new Thickness(0, 0, -300, 0)), 
-                        new Setter(StackPanel.OpacityProperty, 0.0) 
+                    Setters = {
+                        new Setter(MarginProperty, new Thickness(0, 0, -300, 0)),
+                        new Setter(OpacityProperty, 0.0)
                     },
                     Cue = new Cue(0d)
                 },
                 new KeyFrame
                 {
-                    Setters = { 
-                        new Setter(StackPanel.MarginProperty, new Thickness(0, 0, 0, 0)),
-                        new Setter(StackPanel.OpacityProperty, 1.0)
+                    Setters = {
+                        new Setter(MarginProperty, new Thickness(0, 0, 0, 0)),
+                        new Setter(OpacityProperty, 1.0)
                     },
-                    Cue = new Cue(1d) 
+                    Cue = new Cue(1d)
                 }
             }
         };

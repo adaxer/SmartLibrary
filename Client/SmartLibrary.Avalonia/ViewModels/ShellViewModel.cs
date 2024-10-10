@@ -8,9 +8,10 @@ using SmartLibrary.Common.Extensions;
 using SmartLibrary.Core.Localization;
 using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Common.Messages;
+using SmartLibrary.Avalonia.Interfaces;
 
 namespace SmartLibrary.Avalonia.ViewModels;
-public partial class ShellViewModel : BaseViewModel, IRecipient<NavigationMessage>, IRecipient<StatusMessage>
+public partial class ShellViewModel : BaseViewModel, IShellViewModel, IRecipient<NavigationMessage>, IRecipient<StatusMessage>
 {
     private readonly INavigationService _navigationService;
     private readonly ILocalizationService _localizationService;
