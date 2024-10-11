@@ -1,8 +1,11 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.iOS;
 using Avalonia.Media;
 using Foundation;
+using Projektanker.Icons.Avalonia.MaterialDesign;
+using Projektanker.Icons.Avalonia;
+using SmartLibrary.Avalonia.Services;
 using UIKit;
 
 namespace SmartLibrary.Avalonia.iOS;
@@ -16,6 +19,10 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        IconProvider.Current
+            .Register<MaterialDesignIconProvider>()
+            .Register<CustomIconProvider>();
+
         return base.CustomizeAppBuilder(builder)
             .WithInterFont();
     }
