@@ -1,23 +1,26 @@
 <UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="using:SmartLibrary.Avalonia.Controls"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"             
+        xmlns:conv="using:SmartLibrary.Avalonia.Converters"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:b="using:SmartLibrary.Avalonia.Behaviors"
-        xmlns:v="using:SmartLibrary.Avalonia.Views"
+        xmlns:v="clr-namespace:SmartLibrary.Avalonia.Views;assembly=SmartLibrary.Avalonia"
         xmlns:vm="clr-namespace:SmartLibrary.Avalonia.ViewModels;assembly=SmartLibrary.Avalonia"
+        xmlns:cvm="clr-namespace:SmartLibrary.Common.ViewModels;assembly=SmartLibrary.Common"
+        xmlns:avm="using:SmartLibrary.Avalonia.Android.ViewModels"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SmartLibrary.Avalonia.Android.Views.ShellView"
-        x:DataType="vm:ShellViewModel" Background="{DynamicResource ShellBackgroundBrush}">
+        x:DataType="avm:AndroidShellViewModel" Background="{DynamicResource ShellBackgroundBrush}">
 
     <UserControl.DataTemplates>
         <DataTemplate DataType="{x:Type vm:MenuEntry}">
-            <Button Foreground="White" Margin="8 4" Command="{Binding #_itemsHost.((vm:ShellViewModel)DataContext).ShowItemCommand}" CommandParameter="{Binding}">
+            <Button Foreground="White" Margin="8 4" Command="{Binding #_itemsHost.DataContext.ShowItemCommand}" CommandParameter="{Binding}">
                 <StackPanel Orientation="Horizontal">
                     <i:Icon Value="{Binding Icon}"/>
-                    <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding $parent.((vm:ShellViewModel)DataContext).IsExpanded}" Margin="8 0"/>
+                    <TextBlock Width="200" Text="{Binding Name}" IsVisible="{Binding #_itemsHost.DataContext.IsExpanded}" Margin="8 0"/>
                 </StackPanel>
             </Button>
         </DataTemplate>
@@ -40,7 +43,7 @@
                     </Transitions>
                 </TextBlock.Transitions>
             </TextBlock>
-            
+
             <StackPanel x:Name="_internetCheck" Orientation="Horizontal" Grid.Column="2" Margin="0 0 -300 0">
                 <TextBlock  VerticalAlignment="Center" Text="Internet:" />
                 <TextBlock Margin="12 0" Text="{Binding InternetStatus^, FallbackValue='Checking Internet status'}" VerticalAlignment="Center"/>
@@ -69,6 +72,19 @@
                 </TransitioningContentControl>
 
                 <c:BusyIndicator IsBusy="{Binding IsBusy}" />
+                <Border Background="{DynamicResource BusyBackgroundBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        IsVisible="{Binding CurrentDialog, Converter={x:Static conv:Converters.Truthy}}">
+                    <Border BorderBrush="{DynamicResource SystemAccentColor}"
+                            BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ContentControl  Content="{Binding CurrentDialog}" >
+                            <ContentControl.DataTemplates>
+                                <DataTemplate DataType="{x:Type cvm:AboutViewModel}">
+                                    <v:AboutView />
+                                </DataTemplate>
+                            </ContentControl.DataTemplates>
+                        </ContentControl>
+                    </Border>
+                </Border>
             </Panel>
         </SplitView>
     </DockPanel>

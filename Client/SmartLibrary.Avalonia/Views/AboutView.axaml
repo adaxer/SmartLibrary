@@ -4,16 +4,15 @@
              xmlns:vm="using:SmartLibrary.Common.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+             mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="250"
              x:Class="SmartLibrary.Avalonia.Views.AboutView"
-             x:DataType="vm:AboutViewModel">
-    <Grid ColumnDefinitions="200, 200">
-        <Image Source="/Images/smart.png" Stretch="Uniform" VerticalAlignment="Top"/>
-        <StackPanel Margin="0 20" Grid.Column="1">
-        <TextBlock TextWrapping="Wrap" Text="{x:Static l:Strings.AboutText}"/>
-
+             x:DataType="vm:AboutViewModel" MaxWidth="350">
+    <Grid Background="{DynamicResource PaneBackgroundBrush}" ColumnDefinitions="3*, 4*">
+        <Image Source="/Images/smart.png" Stretch="Uniform" Margin="0 20 0 0" VerticalAlignment="Top"/>
+        <StackPanel Margin="20" Grid.Column="1">
+            <TextBlock TextWrapping="Wrap" Text="{x:Static l:Strings.AboutText}"/>
             <Button Content="Ok" Width="100" Margin="0 20" HorizontalContentAlignment="Center" Command="{Binding CloseCommand}"/>
         </StackPanel>
     </Grid>
-    
+
 </UserControl>

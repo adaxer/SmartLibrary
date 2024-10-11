@@ -27,7 +27,7 @@ public class AndroidNavigationService : INavigationService
 
     public Task NavigateAsync<T>(params (string key, object value)[] data) where T : BaseViewModel
     {
-        var shell = (Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!.DataContext as ShellViewModel;
+        var shell = (Application.Current!.ApplicationLifetime as ISingleViewApplicationLifetime)!.MainView!.DataContext as ShellViewModel;
         var target = _serviceProvider.GetService(typeof(T)) as BaseViewModel;
         var parameters = data.ToDictionary(kv => kv.key, kv => kv.value);
         shell!.CurrentModule = target;

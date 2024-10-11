@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Android.Platform;
+using SmartLibrary.Avalonia.Android.ViewModels;
 using SmartLibrary.Avalonia.Android.Views;
 using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Common.Interfaces;
@@ -11,7 +12,8 @@ public class AndroidRegistrar : IRegisterServices
 
     void IRegisterServices.Register(IServiceCollection services)
     {
-        // Main View
+        // Shell
+        services.AddSingleton<IShellViewModel, AndroidShellViewModel>();
         services.AddSingleton<IShellView, ShellView>();
 
         // Platform services

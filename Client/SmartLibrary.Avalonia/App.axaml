@@ -1,11 +1,11 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="SmartLibrary.Avalonia.App"
-             RequestedThemeVariant="Default"
+             RequestedThemeVariant="{OnPlatform Default='Default', Android='Dark'}"
             xmlns:avm="using:SmartLibrary.Avalonia.ViewModels"
-xmlns:vm="using:SmartLibrary.Common.ViewModels"
-            xmlns:v="using:SmartLibrary.Avalonia.Views"          xmlns:sys="clr-namespace:System;assembly=System.Runtime">
-    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+            xmlns:vm="using:SmartLibrary.Common.ViewModels"
+            xmlns:v="using:SmartLibrary.Avalonia.Views" 
+            xmlns:sys="clr-namespace:System;assembly=System.Runtime">
 
     <Application.Styles>
         <FluentTheme >
