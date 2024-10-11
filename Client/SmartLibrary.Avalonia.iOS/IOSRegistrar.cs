@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Interfaces;
+using SmartLibrary.Avalonia.iOS;
 using SmartLibrary.Avalonia.iOS.Platform;
 using SmartLibrary.Avalonia.iOS.ViewModels;
 using SmartLibrary.Avalonia.iOS.Views;

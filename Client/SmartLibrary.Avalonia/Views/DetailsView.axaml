@@ -20,43 +20,45 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Image asyncImageLoader:ImageLoader.Source="{Binding Book.Info.ImageLinks.Large}" VerticalAlignment="Top"/>
-        <StackPanel Grid.Column="1" Margin="12" Grid.IsSharedSizeScope="True">
-            <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
-                <TextBlock Text="{Binding Book.Info.Title}"/>
-            </c:LabelAndUnit>
-            <c:LabelAndUnit Label="{x:Static l:Strings.SubTitle}" >
-                <TextBlock Text="{Binding Book.Info.SubTitle}"/>
-            </c:LabelAndUnit>
-            <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
-                <TextBlock Text="{Binding Book.Info.AuthorInfo}"/>
-            </c:LabelAndUnit>
-            <Label Margin="0 16 0 8" Content="{x:Static l:Strings.Description}" />
-            <TextBlock Margin="0 0 0 16" Classes="small" Text="{Binding Book.Info.Description}" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.IsSharedSizeScope="True">
-                    <c:LabelAndUnit Label="{x:Static l:Strings.Publisher}" >
-                        <TextBlock Text="{Binding Book.Info.Publisher}"/>
-                    </c:LabelAndUnit>
-                    <c:LabelAndUnit Label="{x:Static l:Strings.PublishDate}" >
-                        <TextBlock Text="{Binding Book.Info.PublishDate}"/>
-                    </c:LabelAndUnit>
-                </StackPanel>
-                <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
-                    <c:LabelAndUnit Label="{x:Static l:Strings.Pages}" Unit="Pages">
-                        <TextBlock Text="{Binding Book.Info.Pages}"/>
-                    </c:LabelAndUnit>
-                    <c:LabelAndUnit Label="{x:Static l:Strings.Price}" Unit="{Binding Book.SaleInfo.ListPrice.Currency}">
-                        <TextBlock Text="{Binding Book.SaleInfo.ListPrice.Amount}"/>
-                    </c:LabelAndUnit>
-                </StackPanel>
-            </Grid>
-            <Button Margin="0 16" MinWidth="100" Content="{x:Static l:Strings.Share}" Command="{Binding SaveCommand}"  HorizontalAlignment="Left" IsVisible="{Binding CanShare}"/>
-        </StackPanel>
+        <ScrollViewer Grid.Column="1" Margin="12">
+            <StackPanel Grid.IsSharedSizeScope="True">
+                <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
+                    <TextBlock Text="{Binding Book.Info.Title}"/>
+                </c:LabelAndUnit>
+                <c:LabelAndUnit Label="{x:Static l:Strings.SubTitle}" >
+                    <TextBlock Text="{Binding Book.Info.SubTitle}"/>
+                </c:LabelAndUnit>
+                <c:LabelAndUnit Label="{x:Static l:Strings.Title}" >
+                    <TextBlock Text="{Binding Book.Info.AuthorInfo}"/>
+                </c:LabelAndUnit>
+                <Label Margin="0 16 0 8" Content="{x:Static l:Strings.Description}" />
+                <TextBlock Margin="0 0 0 16" Classes="small" Text="{Binding Book.Info.Description}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.IsSharedSizeScope="True">
+                        <c:LabelAndUnit Label="{x:Static l:Strings.Publisher}" >
+                            <TextBlock Text="{Binding Book.Info.Publisher}"/>
+                        </c:LabelAndUnit>
+                        <c:LabelAndUnit Label="{x:Static l:Strings.PublishDate}" >
+                            <TextBlock Text="{Binding Book.Info.PublishDate}"/>
+                        </c:LabelAndUnit>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
+                        <c:LabelAndUnit Label="{x:Static l:Strings.Pages}" Unit="Pages">
+                            <TextBlock Text="{Binding Book.Info.Pages}"/>
+                        </c:LabelAndUnit>
+                        <c:LabelAndUnit Label="{x:Static l:Strings.Price}" Unit="{Binding Book.SaleInfo.ListPrice.Currency}">
+                            <TextBlock Text="{Binding Book.SaleInfo.ListPrice.Amount}"/>
+                        </c:LabelAndUnit>
+                    </StackPanel>
+                </Grid>
+                <Button Margin="0 16" MinWidth="100" Content="{x:Static l:Strings.Share}" Command="{Binding SaveCommand}"  HorizontalAlignment="Left" IsVisible="{Binding CanShare}"/>
+            </StackPanel>
+        </ScrollViewer>
         <c:BusyIndicator IsBusy="{Binding IsBusy}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>
