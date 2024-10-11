@@ -15,6 +15,8 @@ public partial class App : Application
 {
     private ServiceProvider _serviceProvider = default!;
 
+    public ServiceProvider? ServiceProvider => _serviceProvider;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);

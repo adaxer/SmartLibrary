@@ -3,7 +3,7 @@ using SmartLibrary.Common.Models;
 
 namespace SmartLibrary.Common.ViewModels;
 
-public partial class DetailsViewModel : BaseViewModel
+public partial class DetailsViewModel : BaseViewModel, INavigateBack
 {
     private readonly IBookService _bookService;
     private readonly ILocationService _locationService;
