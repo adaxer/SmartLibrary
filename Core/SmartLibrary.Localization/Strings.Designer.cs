@@ -151,6 +151,15 @@ namespace SmartLibrary.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User {0} is logged in.
+        /// </summary>
+        public static string LoggedInName {
+            get {
+                return ResourceManager.GetString("LoggedInName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login failed for {0}.
         /// </summary>
         public static string LoginFailed {

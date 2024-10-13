@@ -18,6 +18,4 @@ public static class Converters
             long l => l != 0,               
             _ => true                                
         });
-
-
 }

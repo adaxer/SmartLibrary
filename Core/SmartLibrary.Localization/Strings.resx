@@ -43,6 +43,9 @@
   <data name="EnterUserName" xml:space="preserve">
     <value>Enter user name</value>
   </data>
+  <data name="LoggedInName" xml:space="preserve">
+    <value>User {0} is logged in</value>
+  </data>
   <data name="LoginFailed" xml:space="preserve">
     <value>Login failed for {0}</value>
   </data>

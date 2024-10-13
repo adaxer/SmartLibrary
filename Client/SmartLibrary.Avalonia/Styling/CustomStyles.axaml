@@ -55,4 +55,11 @@
         <Setter Property="Margin" Value="16 0" />
         <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}" />
     </Style>
+
+    <Style Selector="TextBlock.error">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+
+
 </Styles>

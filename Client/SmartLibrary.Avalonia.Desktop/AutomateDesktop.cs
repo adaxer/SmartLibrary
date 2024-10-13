@@ -29,6 +29,11 @@ internal class AutomateDesktop : IAutomate
         var searchViewModel = await WaitForAsync(() => (_shell.CurrentModule as SearchViewModel)!);
         searchViewModel.SearchText = "blazor";
         searchViewModel.SearchCommand.Execute(null);
+        await WaitForAsync(() => searchViewModel.Books.Any());
+        await Task.Delay(1000);
+
+        var login = await WaitForAsync<MenuEntry?>(()=> _shell.Dialogs.Single(m=>m.TargetType.Equals(typeof(LoginViewModel))));
+        _shell.ShowItemCommand.Execute(login);
     }
 
     async Task<T> WaitForAsync<T>(Func<T> check, int waitMs = 100)

@@ -34,6 +34,9 @@
   <data name="EnterUserName" xml:space="preserve">
     <value>Entrez le nom d'utilisateur</value>
   </data>
+  <data name="LoggedInName" xml:space="preserve">
+    <value>Connexion d'utiliseur {0} établi</value>
+  </data>
   <data name="LoginFailed" xml:space="preserve">
     <value>Échec de la connexion pour {0}</value>
   </data>
