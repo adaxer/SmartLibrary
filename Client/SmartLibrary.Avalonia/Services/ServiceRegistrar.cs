@@ -41,7 +41,6 @@ public class ServiceRegistrar : IRegisterServices
         services.AddSingleton<ISecureStorage, DummyStorage>();
 
         // Http Clients
-        services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
 
         // From ext. Libraries

@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Interfaces;
 using SmartLibrary.Avalonia.iOS;
 using SmartLibrary.Avalonia.iOS.Platform;
 using SmartLibrary.Avalonia.iOS.ViewModels;
 using SmartLibrary.Avalonia.iOS.Views;
 using SmartLibrary.Common.Interfaces;
+using SmartLibrary.Common.Services;
 
 namespace SmartLibrary.Avalonia.IOS;
 public class IOSRegistrar : IRegisterServices
@@ -13,6 +16,10 @@ public class IOSRegistrar : IRegisterServices
 
     void IRegisterServices.Register(IServiceCollection services)
     {
+        // Configuration
+        var configuration = AddConfiguration(services);
+        services.AddSingleton(configuration);
+
         // Shell
         services.AddSingleton<IShellViewModel, IOSShellViewModel>();
         services.AddSingleton<IShellView, ShellView>();
@@ -21,9 +28,22 @@ public class IOSRegistrar : IRegisterServices
         services.AddSingleton<IDialogService, IOSDialogService>();
         services.AddSingleton<INavigationService, IOSNavigationService>();
 
+        // HttpClient
+        var apiBaseUrl = configuration.GetValue<string>("ApiBaseUrl") ?? throw new ArgumentException("Configuration must define ApiBaseUrl");
+        services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute));
+
         // Automate
 #if AUTOMATE 
         services.AddSingleton<IAutomate, AutomateIOS>();
 #endif
+    }
+
+    private IConfiguration AddConfiguration(IServiceCollection services)
+    {
+        var configuration = new ConfigurationBuilder()
+                .AddIOSConfiguration()
+                .AddEnvironmentVariables()
+                .Build();
+        return configuration;
     }
 }

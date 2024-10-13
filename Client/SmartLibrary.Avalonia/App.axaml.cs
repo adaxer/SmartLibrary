@@ -81,9 +81,10 @@ public partial class App : Application
                 Trace.TraceError($"Could not register Services on {registrar}: {ex}");
             }
         }
+        
+        _serviceProvider = services.BuildServiceProvider();
 
         base.RegisterServices();
-
-        _serviceProvider = services.BuildServiceProvider();
     }
+
 }

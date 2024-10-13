@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "SmartLibrary Desktop (Development)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "SmartLibrary Desktop (Testing)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Testing"
+      }
+    }
+  }
+}
