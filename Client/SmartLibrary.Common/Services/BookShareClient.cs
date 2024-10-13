@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using SmartLibrary.Common.Interfaces;
-using SmartLibrary.Core.Messages;
+using Microsoft.Extensions.Configuration;
 
 namespace SmartLibrary.Common.Services;
 
 public class BookShareClient : IBookShareClient, IRequireInitializeAsync
 {
     private HubConnection _connection = default!;
+    private string _apiBaseUrl;
     private readonly IPubSubService pubSubService;
 
-    public BookShareClient(IPubSubService pubSubService)
+    public BookShareClient(IPubSubService pubSubService, IConfiguration configuration)
     {
         this.pubSubService = pubSubService;
+        _apiBaseUrl = configuration.GetValue<string>("ApiBaseUrl")!;
     }
     public async Task InitializeAsync()
     {
         try
         {
             _connection = new HubConnectionBuilder()
-                .WithUrl($"https://localhost:7023/bookshub")
-                //.WithUrl($"https://daxbookserver.azurewebsites.net/bookshub")
+                .WithUrl($"{_apiBaseUrl}/bookshub")
                 .WithAutomaticReconnect()
                 .Build();
 

@@ -40,7 +40,7 @@ public class AndroidRegistrar : IRegisterServices
     private IConfiguration AddConfiguration(IServiceCollection services)
     {
         var configuration = new ConfigurationBuilder()
-                .AddAndroidConfiguration()
+                .AddCodeConfiguration()
                 .AddEnvironmentVariables()
                 .Build();
         return configuration;

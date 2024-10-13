@@ -41,7 +41,7 @@ public class IOSRegistrar : IRegisterServices
     private IConfiguration AddConfiguration(IServiceCollection services)
     {
         var configuration = new ConfigurationBuilder()
-                .AddIOSConfiguration()
+                .AddCodeConfiguration()
                 .AddEnvironmentVariables()
                 .Build();
         return configuration;

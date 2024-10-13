@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-public class IOSConfigurationSource : IConfigurationSource
+public class ConfigurationSource : IConfigurationSource
 {
     public IConfigurationProvider Build(IConfigurationBuilder builder)
     {
-        return new IOSConfigurationProvider();
+        return new CodeConfigurationProvider();
     }
 }

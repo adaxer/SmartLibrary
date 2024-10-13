@@ -15,6 +15,7 @@ using SmartLibrary.Common.ViewModels;
 using SmartLibrary.Common.Interfaces;
 using CommunityToolkit.Mvvm.Messaging;
 using SmartLibrary.Core.Localization;
+using Microsoft.Extensions.Configuration;
 
 namespace SmartLibrary.Wpf;
 /// <summary>
@@ -47,8 +48,10 @@ public partial class App : Application
 		services.AddSingleton<ILocationService, WpfLocationService>();
 		services.AddSingleton<IUserClient, UserClient>();
         // Bei dem Client wird BaseAddress nicht gesetzt, warum auch immer
-        services.AddHttpClient(nameof(IBookStorage), client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
-        services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
+        var configuration = AddConfiguration(services);
+        var apiBase = configuration.GetValue<string>("ApiBaseUrl")!;
+        //services.AddHttpClient(nameof(IBookStorage), client => client.BaseAddress = new Uri(apiBase, UriKind.Absolute));
+        services.AddHttpClient<IUserClient, UserClient>(client => client.BaseAddress = new Uri(apiBase, UriKind.Absolute));
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
         services.AddSingleton<ILocalizationService, ResXLocalizationService>();
         services.AddSingleton<IBookShareClient, BookShareClient>();
@@ -76,7 +79,22 @@ public partial class App : Application
         services.AddTransient(sp => sp.GetRequiredService<IBookShareClient>() as IRequireInitializeAsync);
         services.AddDbContext<BooksContext>(options =>
                 options.UseSqlite("Filename=Books.db"));
+
+        services.AddSingleton(configuration);
     }
+
+    private IConfiguration AddConfiguration(IServiceCollection services)
+    {
+        string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
+        var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+        return configuration;
+    }
+
 
     protected override void OnStartup(StartupEventArgs e)
     {

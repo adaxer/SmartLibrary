@@ -37,7 +37,7 @@ public class ServiceRegistrar : IRegisterServices
 
         services.AddSingleton<ILocationService, DummyLocationService>();
         services.AddSingleton<IBookStorage, DummyBookStorage>();
-        services.AddSingleton<IBookShareClient, DummyBookShareClient>();
+        services.AddSingleton<IBookShareClient, BookShareClient>();
         services.AddSingleton<ISecureStorage, DummyStorage>();
 
         // Http Clients

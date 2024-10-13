@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "SmartLibrary Wpf (Development)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "SmartLibrary Wpf (Testing)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Testing"
+      }
+    }
+  }
+}

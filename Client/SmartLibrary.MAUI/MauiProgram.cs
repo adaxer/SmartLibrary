@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using ISecureStorage = SmartLibrary.Common.Interfaces.ISecureStorage;
 
@@ -25,13 +26,20 @@ public static class MauiProgram
 		builder.Logging.SetMinimumLevel(LogLevel.Warning);
 #endif
 
+        builder.Services.AddSingleton<ILocalizationService, ResXLocalizationService>();
         builder.Services.AddSingleton<ILocationService, MauiLocationService>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         builder.Services.AddSingleton<IBookService, BookService>();
         builder.Services.AddSingleton<IUserClient, UserClient>();
-        builder.Services.AddHttpClient<IUserClient, UserClient>(client=>client.BaseAddress=new Uri("https://localhost:7023", UriKind.Absolute));
+        var configuration = new ConfigurationBuilder()
+            .AddCodeConfiguration()
+            .AddEnvironmentVariables()
+            .Build();
+        builder.Services.AddSingleton<IConfiguration>(configuration);
+        var apiBase = configuration.GetValue<string>("ApiBaseUrl")!;
+        builder.Services.AddHttpClient<IUserClient, UserClient>(client=>client.BaseAddress=new Uri(apiBase, UriKind.Absolute));
         builder.Services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
-        builder.Services.AddHttpClient<IBookStorage, BookStorage>(client => client.BaseAddress = new Uri("https://localhost:7023", UriKind.Absolute));
+        builder.Services.AddHttpClient<IBookStorage, BookStorage>(client => client.BaseAddress = new Uri(apiBase, UriKind.Absolute));
 
         builder.Services.AddTransient<IBookStorage, BookStorage>();
         builder.Services.AddTransient<ISecureStorage, MAUISecureStorage>();

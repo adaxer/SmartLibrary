@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using SmartLibrary.Core.Interfaces;
 using SmartLibrary.Core.Models;
 
@@ -11,10 +11,10 @@ public class BookStorage : IBookStorage
     private readonly BooksContext context;
     private readonly HttpClient _client;
 
-    public BookStorage(BooksContext context, [FromKeyedServices(nameof(IBookStorage))] HttpClient client)
+    public BookStorage(BooksContext context, IConfiguration configuration)
     {
         this.context = context;
-        _client = client;
+        _client = new HttpClient { BaseAddress = new Uri(configuration.GetValue<string>("ApiBaseUrl"), UriKind.Absolute) };
     }
 
     public async Task SaveBook(SavedBook book)

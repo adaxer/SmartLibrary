@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
-public class AndroidConfigurationProvider : ConfigurationProvider
+public class CodeConfigurationProvider : ConfigurationProvider
 {
     public override void Load()
     {

@@ -30,15 +30,6 @@ public class DummyBookStorage : IBookStorage
     }
 }
 
-public class DummyBookShareClient : IBookShareClient
-{
-    public Task<bool> ShareBook(SavedBook book)
-    {
-        // Simulate sharing the book and return true to indicate success
-        return Task.FromResult(true);
-    }
-}
-
 public class DummyStorage : ISecureStorage
 {
     private readonly Dictionary<string, object> _storage = new();

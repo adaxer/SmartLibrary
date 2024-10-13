@@ -51,5 +51,4 @@ public class DesktopRegistrar : IRegisterServices
                 .Build();
         return configuration;
     }
-
 }
