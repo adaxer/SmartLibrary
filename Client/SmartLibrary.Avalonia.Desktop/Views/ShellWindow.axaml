@@ -10,7 +10,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SmartLibrary.Avalonia.Desktop.Views.ShellWindow"
-        x:DataType="vm:ShellViewModel" TransparencyLevelHint="AcrylicBlur" Background="{DynamicResource ShellBackgroundBrush}"
+        x:DataType="vm:ShellViewModel" 
+        TransparencyLevelHint="AcrylicBlur" 
+        Background="{DynamicResource ShellBackgroundBrush}"
+        ExtendClientAreaToDecorationsHint="True"
         Title="{Binding Title}" Icon="/Assets/avalonia-logo.ico">
 
     <Window.DataTemplates>
@@ -25,10 +28,24 @@
     </Window.DataTemplates>
 
     <DockPanel>
-        <Grid ColumnDefinitions="Auto, *, Auto" DockPanel.Dock="Bottom" >
-            <StackPanel Orientation="Horizontal">
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Gray"
+                    TintOpacity="1"
+                    MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <Border Classes="title" DockPanel.Dock="Top">
+            <TextBlock Classes="h2" HorizontalAlignment="Center" Text="{Binding Title}" />
+        </Border>
+
+        <Grid ColumnDefinitions="Auto, *, Auto"  DockPanel.Dock="Bottom" Background="{DynamicResource TitleBrush}" Height="40">
+            <StackPanel Margin="16 0" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="Zoom:" />
-                <Slider IsSnapToTickEnabled="True" TickFrequency="0.05" Minimum="0.5" Maximum="2" Value="1" x:Name="_zoomSlider" Margin="16 0" Width="200"/>
+                <Slider IsSnapToTickEnabled="True" VerticalAlignment="Center" TickFrequency="0.05" Minimum="0.5" Maximum="2" Value="1" x:Name="_zoomSlider" 
+                        Margin="16 -12 16 0" Height="40" Width="200"/>
                 <TextBlock Text="{Binding #_zoomSlider.Value, StringFormat={}{0:F2}}" VerticalAlignment="Center"/>
             </StackPanel>
 

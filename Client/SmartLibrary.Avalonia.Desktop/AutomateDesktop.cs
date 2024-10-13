@@ -23,6 +23,7 @@ internal class AutomateDesktop : IAutomate
     private async Task StartAutomationAsync()
     {
         await Task.Delay(1000);
+        return;
         var search = await WaitForAsync<MenuEntry?>(() => _shell.Modules.Single(m => m.TargetType.Equals(typeof(SearchViewModel))));
         _shell.ShowItemCommand.Execute(search);
 

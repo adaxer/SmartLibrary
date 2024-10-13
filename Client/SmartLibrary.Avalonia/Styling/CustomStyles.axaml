@@ -61,5 +61,9 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
-
+    <Style Selector="Border.title">
+        <Setter Property="Background" Value="{DynamicResource TitleBrush}"/>
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>  
 </Styles>
