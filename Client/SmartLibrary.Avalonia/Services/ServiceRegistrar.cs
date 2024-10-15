@@ -29,7 +29,7 @@ public class ServiceRegistrar : IRegisterServices
 
         // Common Services
         services.AddTransient<IBookService, BookService>();
-        services.AddTransient<IUserClient, UserClient>();
+        services.AddSingleton<IUserClient, UserClient>();
         services.AddTransient<ILocalizationService, ResXLocalizationService>();
 
         // Platform Services

@@ -5,36 +5,45 @@ using System.Net.Http.Json;
 
 namespace SmartLibrary.Common.Services;
 
-public class UserClient : IUserClient
+public partial class UserClient : ObservableObject, IUserClient
 {
     const string StorageKey = "UserInfo";
     private readonly HttpClient _client;
     private readonly ILogger<UserClient> _logger;
     private readonly ISecureStorage _secureStorage;
-    private static UserInfo _userInfo = UserInfo.None;
+    private readonly IPubSubService _pubSubService;
+    private static UserInfo s_userInfo = UserInfo.None;
 
-    public UserClient(HttpClient client, ILogger<UserClient> logger, ISecureStorage secureStorage)
+    public UserClient(HttpClient client, ILogger<UserClient> logger, ISecureStorage secureStorage, IPubSubService pubSubService)
     {
         _client = client;
         _logger = logger;
         _secureStorage = secureStorage;
+        _pubSubService = pubSubService;
     }
 
-    public string? UserName => _userInfo?.UserName;
+    [ObservableProperty]
+    private UserInfo _userInfo = s_userInfo;
 
-    public string? Email => _userInfo?.Email;
+    partial void OnUserInfoChanged(UserInfo value)
+    {
+        s_userInfo = value;
+        _pubSubService.Publish(new UserInfoChangedMessage(value));
+    }
 
-    public UserInfo? UserInfo => _userInfo;
+    public string? UserName => UserInfo.UserName;
+
+    public string? Email => UserInfo.Email;
 
     public void Logout()
     {
         _secureStorage.Remove(StorageKey);
-        _userInfo = UserInfo.None;
+        UserInfo = UserInfo.None;
     }
 
     public async Task<bool> GetIsLoggedInAsync()
     {
-        if (_userInfo == UserInfo.None)
+        if (UserInfo == UserInfo.None)
         {
             if (await TryLoadUserInfoAsync() == false)
             {
@@ -68,8 +77,8 @@ public class UserClient : IUserClient
         {
             var tokenResponse = await response.Content.ReadFromJsonAsync<TokenResponse>();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResponse!.AccessToken);
-            _userInfo = (await _client.GetFromJsonAsync<UserInfo>("auth/userinfo"))!;
-            _userInfo.AccessToken = tokenResponse.AccessToken;
+            UserInfo = (await _client.GetFromJsonAsync<UserInfo>("auth/userinfo"))!;
+            UserInfo.AccessToken = tokenResponse.AccessToken;
 
             await SaveUserInfoAsync();
             return true;
@@ -82,13 +91,14 @@ public class UserClient : IUserClient
 
     private async Task SaveUserInfoAsync()
     {
-        await _secureStorage.SetAsync(StorageKey, _userInfo);
+        await _secureStorage.SetAsync(StorageKey, UserInfo);
     }
 
     private async Task<bool> TryLoadUserInfoAsync()
     {
-        _userInfo = await _secureStorage.GetAsync(StorageKey, UserInfo.None);
-        return _userInfo != UserInfo.None;
+        UserInfo = await _secureStorage.GetAsync(StorageKey, UserInfo.None);
+
+        return UserInfo != UserInfo.None;
     }
 
     public record LoginInfo(string userName, string email, string password);
