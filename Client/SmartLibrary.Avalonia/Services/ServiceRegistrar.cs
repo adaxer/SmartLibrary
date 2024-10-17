@@ -25,6 +25,7 @@ public class ServiceRegistrar : IRegisterServices
         services.AddTransient<LoginViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddSingleton<SearchViewModel>();
+        services.AddTransient<NewsViewModel>();
         services.AddTransient<DetailsViewModel>();
 
         // Common Services
@@ -45,5 +46,8 @@ public class ServiceRegistrar : IRegisterServices
 
         // From ext. Libraries
         services.AddSingleton<IPubSubService, AvaloniaPubSubService>();
+
+        // Initialisierungen
+        services.AddTransient(sp => sp.GetRequiredService<IBookShareClient>() as IRequireInitializeAsync);
     }
 }

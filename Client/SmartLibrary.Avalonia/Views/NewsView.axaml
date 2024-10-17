@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="using:SmartLibrary.Core.Localization"
+             xmlns:m="using:SmartLibrary.Core.Models"
+             xmlns:vm="using:SmartLibrary.Common.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="250"
+             x:Class="SmartLibrary.Avalonia.Views.NewsView"
+             x:DataType="vm:NewsViewModel" >
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="m:SavedBook">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Name"/>
+                    <ColumnDefinition SharedSizeGroup="Title" MaxWidth="250"/>
+                    <ColumnDefinition SharedSizeGroup="Date"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding UserName}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Title}" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="2" Text="{Binding SaveDate}"/>
+            </Grid> 
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="SavedBooks"/>
+        <ListBox ItemsSource="{Binding SavedBooks}" Grid.Row="1">
+        </ListBox>
+        <Label Content="SharedBooks" Grid.Row="2" />
+        <ListBox ItemsSource="{Binding SharedBooks}" Grid.Row="3">
+        </ListBox>
+    </Grid>
+
+</UserControl>

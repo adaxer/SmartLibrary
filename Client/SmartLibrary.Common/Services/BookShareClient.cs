@@ -8,6 +8,9 @@ public class BookShareClient : IBookShareClient, IRequireInitializeAsync
     private HubConnection _connection = default!;
     private string _apiBaseUrl;
     private readonly IPubSubService pubSubService;
+    private List<SavedBook> _sharedBooks=new();
+
+    public IEnumerable<SavedBook> SharedBooks => _sharedBooks;
 
     public BookShareClient(IPubSubService pubSubService, IConfiguration configuration)
     {
@@ -38,7 +41,8 @@ public class BookShareClient : IBookShareClient, IRequireInitializeAsync
     {
         try
         {
-            var book = JsonConvert.DeserializeObject<SavedBook>(json);
+            var book = JsonConvert.DeserializeObject<SavedBook>(json)!;
+            _sharedBooks.Add(book);
             pubSubService.Publish(new SharedBookMessage(book));
         }
         catch (Exception ex)

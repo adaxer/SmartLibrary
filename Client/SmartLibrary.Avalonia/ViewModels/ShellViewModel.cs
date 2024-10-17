@@ -76,6 +76,7 @@ public partial class ShellViewModel : BaseViewModel, IShellViewModel, IRecipient
     {
         Modules.Add(new MenuEntry(_localizationService.Get("Welcome"), typeof(WelcomeViewModel), "human-greeting-variant"));
         Modules.Add(new MenuEntry(_localizationService.Get("Search"), typeof(SearchViewModel), "magnify"));
+        Modules.Add(new MenuEntry(_localizationService.Get("News"), typeof(NewsViewModel), "newspaper-variant-outline"));
         Modules.Add(new MenuEntry(_localizationService.Get("Settings"), typeof(SettingsViewModel), "cog-outline"));
         Dialogs.Add(new MenuEntry(_localizationService.Get("About"), typeof(AboutViewModel), "information-outline", true));
         Dialogs.Add(new MenuEntry(_localizationService.Get("LoginOrRegister"), typeof(LoginViewModel), "login", true));

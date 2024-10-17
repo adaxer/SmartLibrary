@@ -1,10 +1,4 @@
-﻿using SmartLibrary.Common.Interfaces;
-using SmartLibrary.Core.Interfaces;
-using SmartLibrary.Core.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace SmartLibrary.Avalonia.Services;
+﻿namespace SmartLibrary.Common.Services;
 
 public class DummyLocationService : ILocationService
 {

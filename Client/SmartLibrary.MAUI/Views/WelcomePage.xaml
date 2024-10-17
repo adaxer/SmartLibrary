@@ -9,8 +9,6 @@
 			 x:DataType="vm:WelcomeViewModel" Title="{Binding Title}">
 
     <StackLayout >
-        <Button WidthRequest="200" Text="{x:Static l:Strings.LoginOrRegister}" Command="{Binding LoginCommand}" IsVisible="{Binding IsLoggedIn, Converter={StaticResource NotConverter}}"/>
-        <Button WidthRequest="200" Text="{x:Static l:Strings.Logout}" Command="{Binding LogoutCommand}" IsVisible="{Binding IsLoggedIn}"/>
         <Image Source="smart.png" VerticalOptions="CenterAndExpand" />
     </StackLayout>
 </v:BasePage>

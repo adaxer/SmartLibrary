@@ -55,7 +55,7 @@ public partial class App : Application
         services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = new Uri("https://www.googleapis.com", UriKind.Absolute));
         services.AddSingleton<ILocalizationService, ResXLocalizationService>();
         services.AddSingleton<IBookShareClient, BookShareClient>();
-		services.AddSingleton<IBookStorage, BookStorage>();
+		services.AddTransient<IBookStorage, DummyBookStorage>();
 		services.AddSingleton<ISecureStorage, WpfSecureStorage>();
         services.AddSingleton<IPubSubService,WpfPubSubService>();
 
@@ -73,8 +73,8 @@ public partial class App : Application
 
         services.AddTransient<LoginViewModel>();
 
-        services.AddSingleton<NewsViewModel>();
-        services.AddSingleton<NewsView>();
+        services.AddTransient<NewsViewModel>();
+        services.AddTransient<NewsView>();
 
         services.AddTransient(sp => sp.GetRequiredService<IBookShareClient>() as IRequireInitializeAsync);
         services.AddDbContext<BooksContext>(options =>

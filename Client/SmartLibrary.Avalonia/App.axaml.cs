@@ -9,6 +9,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLibrary.Avalonia.Interfaces;
+using SmartLibrary.Common.Interfaces;
 
 namespace SmartLibrary.Avalonia;
 public partial class App : Application
@@ -50,10 +51,18 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
 
+        LateInitialize();
+
         if(_serviceProvider.GetService<IAutomate>() is IAutomate auto)
         {
             auto.StartAsync();
         }
+    }
+
+    private void LateInitialize()
+    {
+        _serviceProvider.GetRequiredService<IEnumerable<IRequireInitializeAsync>>().ToList().ForEach(a => a.InitializeAsync());
+        _serviceProvider.GetRequiredService<IEnumerable<IRequireInitialize>>().ToList().ForEach(i => i.Initialize());
     }
 
     public override void RegisterServices()

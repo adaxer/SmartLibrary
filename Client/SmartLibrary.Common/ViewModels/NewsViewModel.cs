@@ -4,12 +4,14 @@ public partial class NewsViewModel : BaseViewModel, IRecipient<SharedBookMessage
 {
     private readonly INavigationService _navigator;
     private readonly IBookStorage _storage;
+    private readonly IBookShareClient _bookShareClient;
 
-    public NewsViewModel(INavigationService navigator, IBookStorage storage, IPubSubService pubSubService)
+    public NewsViewModel(INavigationService navigator, IBookStorage storage, IPubSubService pubSubService, IBookShareClient bookShareClient)
     {
         Title = "Shared Pages";
         this._navigator = navigator;
         this._storage = storage;
+        _bookShareClient = bookShareClient;
         pubSubService.Subscribe<SharedBookMessage>(this);
         pubSubService.Subscribe<BookSavedMessage>(this);
         LoadDataAsync();
@@ -25,6 +27,7 @@ public partial class NewsViewModel : BaseViewModel, IRecipient<SharedBookMessage
     {
         IsBusy = true;
         SavedBooks = new ObservableCollection<SavedBook>(await _storage.GetSavedBooks());
+        SharedBooks = new ObservableCollection<SavedBook>(_bookShareClient.SharedBooks);
         IsBusy = false;
     }
 

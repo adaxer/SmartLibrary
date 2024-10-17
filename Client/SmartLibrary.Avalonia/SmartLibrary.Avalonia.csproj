@@ -37,4 +37,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Images\progress-ring.svg" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\NewsView.axaml.cs">
+      <DependentUpon>NewsView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

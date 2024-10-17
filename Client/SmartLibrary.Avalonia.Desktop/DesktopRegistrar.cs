@@ -39,11 +39,7 @@ public class DesktopRegistrar : IRegisterServices
     private IConfiguration AddConfiguration(IServiceCollection services)
     {
         string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
-        if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
-        {
-            environment = "Testing";
-        }
-        var configuration = new ConfigurationBuilder()
+         var configuration = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
