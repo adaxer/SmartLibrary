@@ -295,6 +295,15 @@ namespace SmartLibrary.Core.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The themes.
+        /// </summary>
+        public static string Themes {
+            get {
+                return ResourceManager.GetString("Themes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
